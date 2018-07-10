@@ -412,8 +412,8 @@ TARGET_CPPFLAGS := \
 	-D_GNU_SOURCE \
 	$(if $(CONFIG_WPA_MSG_MIN_PRIORITY),-DCONFIG_MSG_MIN_PRIORITY=$(CONFIG_WPA_MSG_MIN_PRIORITY))
 
-TARGET_CFLAGS += -ffunction-sections -fdata-sections
-TARGET_LDFLAGS += -Wl,--gc-sections
+TARGET_CFLAGS += -ffunction-sections -fdata-sections -flto
+TARGET_LDFLAGS += -Wl,--gc-sections -flto=jobserver -fuse-linker-plugin
 ifeq ($(findstring supplicant,$(BUILD_VARIANT)),)
   TARGET_LDFLAGS += -lubox -lubus
 endif
@@ -429,6 +429,7 @@ define Build/RunMake
 		$(DRIVER_MAKEOPTS) \
 		LIBS="$(TARGET_LDFLAGS)" \
 		LIBS_c="$(TARGET_LDFLAGS_C)" \
+		AR="$(TARGET_CROSS)gcc-ar" \
 		BCHECK= \
 		$(2)
 endef
@@ -450,7 +451,7 @@ define Build/Compile/wpad
 		MULTICALL=1 \
 		wpa_cli wpa_supplicant_multi.a \
 	)
-	$(TARGET_CC) -o $(PKG_BUILD_DIR)/wpad \
+	+export MAKEFLAGS="$(MAKE_JOBSERVER)"; $(TARGET_CC) -o $(PKG_BUILD_DIR)/wpad \
 		$(TARGET_CFLAGS) \
 		./files/multicall.c \
 		$(PKG_BUILD_DIR)/hostapd/hostapd_multi.a \
