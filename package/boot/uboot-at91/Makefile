@@ -7,12 +7,12 @@
 
 include $(TOPDIR)/rules.mk
 
-PKG_VERSION:=linux4sam_5.8
+PKG_VERSION:=linux4sam_6.0-rc4
 PKG_RELEASE:=1
 
 PKG_SOURCE_PROTO:=git
 PKG_SOURCE_URL:=https://github.com/linux4sam/u-boot-at91.git
-PKG_SOURCE_VERSION:=59f202622154f82e708a6ca2bf86350a5c1b2d33
+PKG_SOURCE_VERSION:=ed5f0c6f9de0c59d807bcd7386ef7f3c8102ffb0
 
 include $(INCLUDE_DIR)/u-boot.mk
 include $(INCLUDE_DIR)/package.mk
@@ -86,12 +86,6 @@ define U-Boot/sama5d27_som1_ek_mmc
   BUILD_DEVICES:=at91-sama5d27_som1_ek
 endef
 
-define U-Boot/sama5d27_som1_ek_spiflash
-  NAME:=SAMA5D27 SOM1 Ek (QSPI Flash)
-  BUILD_SUBTARGET:=sama5d2
-  BUILD_DEVICES:=at91-sama5d27_som1_ek
-endef
-
 define U-Boot/sama5d2_ptc_ek_nandflash
   NAME:=SAMA5D2 PTC Ek (Nand Flash)
   BUILD_SUBTARGET:=sama5d2
@@ -115,7 +109,6 @@ UBOOT_TARGETS := \
 	sama5d4_xplained_spiflash \
 	sama5d4_xplained_nandflash\
     sama5d27_som1_ek_mmc \
-    sama5d27_som1_ek_spiflash \
 	sama5d2_ptc_ek_nandflash \
 	sama5d2_ptc_ek_mmc
 
@@ -124,7 +117,7 @@ define Build/Compile
      CROSS_COMPILE=$(TARGET_CROSS) \
 	 DTC=$(LINUX_DIR)/scripts/dtc/dtc \
      KCFLAGS="$(filter-out -fstack-protector \
-      -mfloat-abi=hard, $(TARGET_CFLAGS)) -mfloat-abi=soft"
+      -mfloat-abi=hard, $(TARGET_CFLAGS)) -mfloat-abi=soft -Wno-format-security"
 endef
 
 $(eval $(call BuildPackage/U-Boot))
