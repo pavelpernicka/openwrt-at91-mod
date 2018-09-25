@@ -46,6 +46,8 @@ define Build/at91-sdcard
   mkfs.fat -C $@.boot $(FAT32_BLOCKS)
 
   mcopy -i $@.boot $(KDIR)/zImage ::zImage
+  mcopy -i $@.boot $(KDIR)/$(DEVICE_NAME)-fit-zImage.itb \
+	::$(DEVICE_NAME:at91-%=%)-fit-zImage.itb
 
   $(foreach dts,$(DEVICE_DTS), \
      mcopy -i $@.boot $(DTS_DIR)/$(dts).dtb \
@@ -94,6 +96,8 @@ define Device/evaluation-dtb
   $(Device/evaluation-zImage)
   IMAGES += dtb
   IMAGE/dtb := install-dtb
+  KERNEL_SUFFIX := -fit-zImage.itb
+  KERNEL := kernel-bin | gzip | fit gzip $$(DTS_DIR)/$$(DEVICE_DTS).dtb
 endef
 
 define Device/evaluation-fit
