@@ -46,8 +46,13 @@ define Build/at91-sdcard
   mkfs.fat -C $@.boot $(FAT32_BLOCKS)
 
   mcopy -i $@.boot $(KDIR)/zImage ::zImage
+
+  mkenvimage -s 0x4000 -o $(BIN_DIR)/uboot.env \
+        ./boards/$(DEVICE_NAME:at91-%=%)/uboot-env.txt
+  mcopy -i $@.boot $(BIN_DIR)/uboot.env ::uboot.env
+
   mcopy -i $@.boot $(KDIR)/$(DEVICE_NAME)-fit-zImage.itb \
-	::$(DEVICE_NAME:at91-%=%)-fit-zImage.itb
+	::fitImage-$(DEVICE_NAME:at91-%=%).itb
 
   $(foreach dts,$(DEVICE_DTS), \
      mcopy -i $@.boot $(DTS_DIR)/$(dts).dtb \
