@@ -61,6 +61,7 @@ define Build/at91-sdcard
 
   cp $(DTS_DIR)/$(DEVICE_NAME).dtb $(BIN_DIR)/at91dtoverlay-$(DEVICE_NAME:at91-%=%)/
 
+  PATH=$(LINUX_DIR)/scripts/dtc:$(PATH) \
   mkimage -f $(BIN_DIR)/at91dtoverlay-$(DEVICE_NAME:at91-%=%)/$(DEVICE_NAME:at91-%=%).its \
      $(BIN_DIR)/fitImage-$(DEVICE_NAME:at91-%=%).itb
 
