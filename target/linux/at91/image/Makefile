@@ -51,8 +51,15 @@ define Build/at91-sdcard
         ./boards/$(DEVICE_NAME:at91-%=%)/uboot-env.txt
   mcopy -i $@.boot $(BIN_DIR)/uboot.env ::uboot.env
 
-  mcopy -i $@.boot $(KDIR)/$(DEVICE_NAME)-fit-zImage.itb \
-	::fitImage-$(DEVICE_NAME:at91-%=%).itb
+  cp $(KDIR)/zImage $(BIN_DIR)/at91dtoverlay-$(DEVICE_NAME:at91-%=%)/
+
+  cp $(DTS_DIR)/$(DEVICE_NAME).dtb $(BIN_DIR)/at91dtoverlay-$(DEVICE_NAME:at91-%=%)/
+
+  mkimage -f $(BIN_DIR)/at91dtoverlay-$(DEVICE_NAME:at91-%=%)/$(DEVICE_NAME:at91-%=%).its \
+     $(BIN_DIR)/fitImage-$(DEVICE_NAME:at91-%=%).itb
+
+  mcopy -i $@.boot $(BIN_DIR)/fitImage-$(DEVICE_NAME:at91-%=%).itb \
+	 ::fitImage-$(DEVICE_NAME:at91-%=%).itb
 
   $(foreach dts,$(DEVICE_DTS), \
      mcopy -i $@.boot $(DTS_DIR)/$(dts).dtb \
@@ -75,7 +82,9 @@ define Build/at91-sdcard
 
   gzip -nc9 $@.img > $@
 
-  rm -f $@.img $@.boot )
+  rm -fvr $@.img $@.boot \
+     $(BIN_DIR)/at91dtoverlay-$(DEVICE_NAME:at91-%=%)/*.dtb \
+	 $(BIN_DIR)/at91dtoverlay-$(DEVICE_NAME:at91-%=%)/zImage )
 endef
 
 define Device/evaluation-sdimage
@@ -101,8 +110,6 @@ define Device/evaluation-dtb
   $(Device/evaluation-zImage)
   IMAGES += dtb
   IMAGE/dtb := install-dtb
-  KERNEL_SUFFIX := -fit-zImage.itb
-  KERNEL := kernel-bin | gzip | fit gzip $$(DTS_DIR)/$$(DEVICE_DTS).dtb
 endef
 
 define Device/evaluation-fit
