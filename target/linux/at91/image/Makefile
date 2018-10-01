@@ -51,8 +51,6 @@ define Build/at91-sdcard
   rm -f $@.boot
   mkfs.fat -C $@.boot $(FAT32_BLOCKS)
 
-  mcopy -i $@.boot $(KDIR)/zImage ::zImage
-
   mkenvimage -s 0x4000 -o $(BIN_DIR)/uboot.env \
         ./boards/$(DEVICE_NAME:at91-%=%)/uboot-env.txt
   mcopy -i $@.boot $(BIN_DIR)/uboot.env ::uboot.env
@@ -63,14 +61,10 @@ define Build/at91-sdcard
 
   PATH=$(LINUX_DIR)/scripts/dtc:$(PATH) \
   mkimage -f $(BIN_DIR)/at91dtoverlay-$(DEVICE_NAME:at91-%=%)/$(DEVICE_NAME:at91-%=%).its \
-     $(BIN_DIR)/fitImage-$(DEVICE_NAME:at91-%=%).itb
+     $(BIN_DIR)/$(DEVICE_NAME:at91-%=%).itb
 
-  mcopy -i $@.boot $(BIN_DIR)/fitImage-$(DEVICE_NAME:at91-%=%).itb \
-	 ::fitImage-$(DEVICE_NAME:at91-%=%).itb
-
-  $(foreach dts,$(DEVICE_DTS), \
-     mcopy -i $@.boot $(DTS_DIR)/$(dts).dtb \
-        ::$(dts).dtb)
+  mcopy -i $@.boot $(BIN_DIR)/$(DEVICE_NAME:at91-%=%).itb \
+	 ::$(DEVICE_NAME:at91-%=%).itb
 
   mcopy -i $@.boot \
     $(BIN_DIR)/u-boot-$(DEVICE_NAME:at91-%=%)_mmc/u-boot.bin \
