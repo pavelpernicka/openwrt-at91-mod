@@ -81,7 +81,7 @@
  	.set_wiphy_params = ieee80211_set_wiphy_params,
  	.set_tx_power = ieee80211_set_tx_power,
  	.get_tx_power = ieee80211_get_tx_power,
-+	.set_antenna_gain = ieee80211_set_antenna_gain,
++	//.set_antenna_gain = ieee80211_set_antenna_gain,
  	.set_wds_peer = ieee80211_set_wds_peer,
  	.rfkill_poll = ieee80211_rfkill_poll,
  	CFG80211_TESTMODE_CMD(ieee80211_testmode_cmd)
