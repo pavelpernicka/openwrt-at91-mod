@@ -6,7 +6,15 @@ export GCC_HONOUR_COPTS=s
 
 define Package/at91dtoverlay/install/default
   $(INSTALL_DIR) $(1)/$(BUILD_DEVICES:at91-%=%) && \
-  $(CP) -av $(PKG_BUILD_DIR)/$(BUILD_DEVICES:at91-%=%)/*.dtbo $(1)/$(BUILD_DEVICES:at91-%=%)/ && \
+  ( \
+    if [[ -d $(PKG_BUILD_DIR)/$(BUILD_DEVICES:at91-%=%)/ ]]; then \
+      if [[ "$(ls -A $(PKG_BUILD_DIR)/$(BUILD_DEVICES:at91-%=%)/)" ]]; then \
+        echo ""; \
+      else \
+        $(CP) -av $(PKG_BUILD_DIR)/$(BUILD_DEVICES:at91-%=%)/*.dtbo $(1)/$(BUILD_DEVICES:at91-%=%)/; \
+      fi \
+    fi \
+  ) && \
   $(CP) -av $(PKG_BUILD_DIR)/$(BUILD_DEVICES:at91-%=%).its $(1)/
 endef
 
