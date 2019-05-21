@@ -69,3 +69,11 @@ define Device/at91-sama5d4_xplained
   $(Device/evaluation-sdimage)
 endef
 TARGET_DEVICES += at91-sama5d4_xplained
+
+define Device/at91-sama5d2_icp
+  $(Device/evaluation-dtb)
+  DEVICE_TITLE := Microchip SAMA5D2 ICP
+  KERNEL_SIZE := 6144k
+  $(Device/evaluation-sdimage)
+endef
+TARGET_DEVICES += at91-sama5d2_icp

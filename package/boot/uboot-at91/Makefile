@@ -104,6 +104,12 @@ define U-Boot/sama5d2_ptc_ek_mmc
   BUILD_DEVICES:=at91-sama5d2_ptc_ek
 endef
 
+define U-Boot/sama5d2_icp_mmc
+  NAME:=SAMA5D2 ICP (SDCard)
+  BUILD_SUBTARGET:=sama5
+  BUILD_DEVICES:=at91-sama5d2_icp
+endef
+
 UBOOT_TARGETS := \
 	at91sam9m10g45ek_nandflash \
 	at91sam9x5ek_nandflash \
@@ -117,7 +123,8 @@ UBOOT_TARGETS := \
     sama5d27_som1_ek_mmc \
     sama5d27_som1_ek_spiflash \
 	sama5d2_ptc_ek_nandflash \
-	sama5d2_ptc_ek_mmc
+	sama5d2_ptc_ek_mmc \
+	sama5d2_icp_mmc
 
 define Build/Compile
   +$(MAKE) $(PKG_JOBS) -C $(PKG_BUILD_DIR) \
