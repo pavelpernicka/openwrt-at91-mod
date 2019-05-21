@@ -1,0 +1,26 @@
+From d2693288a433830c1d1d788b7ceaf5657be8ab87 Mon Sep 17 00:00:00 2001
+From: Claudiu Beznea <claudiu.beznea@microchip.com>
+Date: Tue, 21 May 2019 15:30:50 +0300
+Subject: [PATCH] version: use format specified to avoid compile failures
+
+Signed-off-by: Claudiu Beznea <claudiu.beznea@microchip.com>
+---
+ cmd/version.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/cmd/version.c b/cmd/version.c
+index b2fffe997724..256fabac9a0e 100644
+--- a/cmd/version.c
++++ b/cmd/version.c
+@@ -18,7 +18,7 @@ static int do_version(cmd_tbl_t *cmdtp, int flag, int argc, char * const argv[])
+ {
+ 	char buf[DISPLAY_OPTIONS_BANNER_LENGTH];
+ 
+-	printf(display_options_get_banner(false, buf, sizeof(buf)));
++	printf("%s", display_options_get_banner(false, buf, sizeof(buf)));
+ #ifdef CC_VERSION_STRING
+ 	puts(CC_VERSION_STRING "\n");
+ #endif
+-- 
+2.7.4
+
