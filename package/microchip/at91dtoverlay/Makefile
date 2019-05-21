@@ -50,11 +50,18 @@ define AT91DTOverlay/sama5d27_som1_ek
   BUILD_DEVICES:=at91-sama5d27_som1_ek
 endef
 
+define AT91DTOverlay/sama5d2_icp
+  TITLE:=AT91DTOverlay for SAMA5D2 ICP
+  BUILD_SUBTARGET:=sama5d2
+  BUILD_DEVICES:=at91-sama5d2_icp
+endef
+
 AT91DTOVERLAY_TARGETS := \
     sama5d2_xplained \
     sama5d3_xplained \
     sama5d4_xplained \
-    sama5d27_som1_ek
+    sama5d27_som1_ek \
+    sama5d2_icp
 
 define Build/Compile
   $(MAKE) DTC=$(LINUX_DIR)/scripts/dtc/dtc KERNEL_DIR=$(LINUX_DIR) -C $(PKG_BUILD_DIR) $(BUILD_DEVICES:at91-%=%)_dtbos
