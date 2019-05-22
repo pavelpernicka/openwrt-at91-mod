@@ -1,0 +1,26 @@
+From 69ff716ebd4ea502248989ac21f0d347c32b61c2 Mon Sep 17 00:00:00 2001
+From: Claudiu Beznea <claudiu.beznea@microchip.com>
+Date: Wed, 22 May 2019 11:27:11 +0300
+Subject: [PATCH] dm: pinctrl: use format specified to avoid compile failures
+
+Signed-off-by: Claudiu Beznea <claudiu.beznea@microchip.com>
+---
+ drivers/pinctrl/pinctrl-uclass.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/drivers/pinctrl/pinctrl-uclass.c b/drivers/pinctrl/pinctrl-uclass.c
+index 0e3260afd1ee..49172d17fdec 100644
+--- a/drivers/pinctrl/pinctrl-uclass.c
++++ b/drivers/pinctrl/pinctrl-uclass.c
+@@ -289,7 +289,7 @@ int pinctrl_get_pin_name(struct udevice *dev, int selector, char *buf,
+ 	if (!ops->get_pin_name)
+ 		return -ENOSYS;
+ 
+-	snprintf(buf, size, ops->get_pin_name(dev, selector));
++	snprintf(buf, size, "%s", ops->get_pin_name(dev, selector));
+ 
+ 	return 0;
+ }
+-- 
+2.7.4
+
