@@ -103,3 +103,32 @@ endef
 
 $(eval $(call KernelPackage,at91-i2c))
 
+define KernelPackage/pwrseq-wilc
+  SUBMENU:=$(OTHER_MENU)
+  TITLE:=Power sequence driver for Microchip WILC devices
+  DEPENDS:=@TARGET_at91
+  KCONFIG:=CONFIG_PWRSEQ_WILC
+  FILES:=$(LINUX_DIR)/drivers/mmc/core/pwrseq_wilc.ko
+  AUTOLOAD:=$(call AutoLoad,88,pwrseq_wilc)
+endef
+
+define KernelPackage/pwrseq-wilc/description
+ Kernel module to control power for Microchip WILC devices
+endef
+
+$(eval $(call KernelPackage,pwrseq-wilc))
+
+define KernelPackage/wilc-sdio
+  SUBMENU:=$(OTHER_MENU)
+  TITLE:=WILC SD driver for Microchip WILC devices
+  DEPENDS:=@TARGET_at91 +kmod-pwrseq-wilc
+  KCONFIG:=CONFIG_WILC_SDIO
+  FILES:=$(LINUX_DIR)/drivers/staging/wilc1000/wilc-sdio.ko
+  AUTOLOAD:=$(call AutoLoad,89,wilc-sdio)
+endef
+
+define KernelPackage/pwrseq-wilc/description
+ Kernel module for Microchip WILC SD devices
+endef
+
+$(eval $(call KernelPackage,wilc-sdio))
