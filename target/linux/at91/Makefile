@@ -18,6 +18,6 @@ include $(INCLUDE_DIR)/target.mk
 
 KERNELNAME:=zImage dtbs
 
-DEFAULT_PACKAGES += kmod-usb-ohci kmod-at91-udc kmod-usb-gadget-eth
+DEFAULT_PACKAGES += kmod-usb-ohci kmod-at91-udc kmod-usb-gadget-eth kmod-pwrseq-wilc kmod-wilc-sdio
 
 $(eval $(call BuildTarget))
