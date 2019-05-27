@@ -121,7 +121,7 @@ $(eval $(call KernelPackage,pwrseq-wilc))
 define KernelPackage/wilc-sdio
   SUBMENU:=$(OTHER_MENU)
   TITLE:=WILC SD driver for Microchip WILC devices
-  DEPENDS:=@TARGET_at91 +kmod-pwrseq-wilc
+  DEPENDS:=@TARGET_at91 +kmod-pwrseq-wilc +wilc-firmware +wireless-tools +wireless-regdb
   KCONFIG:=CONFIG_WILC_SDIO
   FILES:=$(LINUX_DIR)/drivers/staging/wilc1000/wilc-sdio.ko
   AUTOLOAD:=$(call AutoLoad,89,wilc-sdio)
