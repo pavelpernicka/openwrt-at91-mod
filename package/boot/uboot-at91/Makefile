@@ -86,7 +86,7 @@ define U-Boot/sama5d27_som1_ek_mmc
   BUILD_DEVICES:=at91-sama5d27_som1_ek
 endef
 
-define U-Boot/sama5d27_som1_ek_spiflash
+define U-Boot/sama5d27_som1_ek_qspiflash
   NAME:=SAMA5D27 SOM1 Ek (QSPI Flash)
   BUILD_SUBTARGET:=sama5
   BUILD_DEVICES:=at91-sama5d27_som1_ek
@@ -121,7 +121,7 @@ UBOOT_TARGETS := \
 	sama5d4_xplained_spiflash \
 	sama5d4_xplained_nandflash\
     sama5d27_som1_ek_mmc \
-    sama5d27_som1_ek_spiflash \
+    sama5d27_som1_ek_qspiflash \
 	sama5d2_ptc_ek_nandflash \
 	sama5d2_ptc_ek_mmc \
 	sama5d2_icp_mmc
