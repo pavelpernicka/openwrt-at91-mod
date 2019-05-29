@@ -38,6 +38,65 @@ define AddDepends/dsa
   DEPENDS+=kmod-dsa $(1)
 endef
 
+define KernelPackage/bridge
+  SUBMENU:=$(NETWORK_DEVICES_MENU)
+  TITLE:=Bridge
+  DEPENDS:=@TARGET_at91 +kmod-llc +kmod-stp
+  FILES:=$(LINUX_DIR)/net/bridge/bridge.ko
+  KCONFIG:=CONFIG_BRIDGE
+  AUTOLOAD:=$(call AutoProbe,bridge)
+endef
+
+define KernelPackage/bridge/description
+  Kernel module for the net bridge
+endef
+
+$(eval $(call KernelPackage,bridge))
+
+define KernelPackage/phylink
+  SUBMENU:=$(NETWORK_DEVICES_MENU)
+  TITLE:=Phylink
+  DEPENDS:=@TARGET_at91
+  FILES:=$(LINUX_DIR)/drivers/net/phy/phylink.ko
+  KCONFIG:=CONFIG_PHYLINK
+  AUTOLOAD:=$(call AutoProbe,phylink)
+endef
+
+define KernelPackage/phylink/description
+  Kernel module for the net bridge
+endef
+
+$(eval $(call KernelPackage,phylink))
+
+define KernelPackage/llc
+  SUBMENU:=$(NETWORK_DEVICES_MENU)
+  TITLE:=LLC
+  DEPENDS:=@TARGET_at91
+  FILES:=$(LINUX_DIR)/net/llc/llc.ko
+  KCONFIG:=CONFIG_LLC
+  AUTOLOAD:=$(call AutoProbe,llc)
+endef
+
+define KernelPackage/llc/description
+  Kernel module for the net LLC
+endef
+
+$(eval $(call KernelPackage,llc))
+
+define KernelPackage/stp
+  SUBMENU:=$(NETWORK_DEVICES_MENU)
+  TITLE:=STP
+  DEPENDS:=@TARGET_at91 +kmod-llc
+  FILES:=$(LINUX_DIR)/net/802/stp.ko
+  KCONFIG:=CONFIG_STP
+  AUTOLOAD:=$(call AutoProbe,stp)
+endef
+
+define KernelPackage/stp/description
+  Kernel module for the STP
+endef
+
+$(eval $(call KernelPackage,stp))
 
 #
 # Switch drivers
