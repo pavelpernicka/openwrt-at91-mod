@@ -18,7 +18,7 @@ define KernelPackage/dsa
 	CONFIG_NET_DSA \
 	CONFIG_NET_SWITCHDEV=y \
 	CONFIG_NET_DSA_HWMON=n
-  DEPENDS:=+kmod-libphy
+  DEPENDS:=+kmod-libphy +kmod-bridge +kmod-phylink
 ifeq ($(CONFIG_OF),y)
   DEPENDS+=+kmod-of-mdio
 endif
