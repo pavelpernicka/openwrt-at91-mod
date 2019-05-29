@@ -197,3 +197,22 @@ define KernelPackage/dsa-mv88e6352/description
 endef
 
 $(eval $(call KernelPackage,dsa-mv88e6352))
+
+define KernelPackage/dsa-ksz9477
+  TITLE:=Microchip KSZ9477 ethernet switch support
+  KCONFIG:=CONFIG_NET_DSA_MICROCHIP_KSZ9477=m
+  KCONFIG+=CONFIG_NET_DSA_MICROCHIP_KSZ9477_SPI=m
+  FILES:=$(LINUX_DIR)/drivers/net/dsa/microchip/ksz9477.ko \
+	$(LINUX_DIR)/drivers/net/dsa/microchip/ksz_common.ko \
+	$(LINUX_DIR)/drivers/net/dsa/microchip/ksz9477_spi.ko
+  AUTOLOAD:=$(call AutoLoad,ksz_common)
+  AUTOLOAD+=$(call AutoLoad,ksz9477)
+  AUTOLOAD+=$(call AutoLoad,ksz9477_spi)
+  $(call AddDepends/dsa)
+endef
+
+define KernelPackage/dsa-ksz9477/description
+  This enables support for the Microchip KSZ9477 ethernet switch chips.
+endef
+
+$(eval $(call KernelPackage,dsa-ksz9477))
