@@ -9,12 +9,12 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=at91bootstrap
-PKG_VERSION:=v3.8.13-rc2
+PKG_VERSION:=v3.8.13-rc3
 PKG_RELEASE:=
 
 PKG_SOURCE_PROTO:=git
 PKG_SOURCE_URL:=https://github.com/linux4sam/at91bootstrap.git
-PKG_SOURCE_VERSION:=d5aba7fd8ffc960d0dac93e80cbb0d313798f35b
+PKG_SOURCE_VERSION:=501b966fbaeab2e844c8c4c0884ea73a84dca0bb
 
 PKG_BUILD_DIR = \
     $(BUILD_DIR)/$(PKG_NAME)-$(BUILD_VARIANT)/$(PKG_NAME)-$(PKG_VERSION)
