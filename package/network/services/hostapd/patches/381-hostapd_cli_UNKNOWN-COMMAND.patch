@@ -1,6 +1,18 @@
+From b0554baf8dddde790cd0825db4f0158e5a83a79e Mon Sep 17 00:00:00 2001
+From: Claudiu Beznea <claudiu.beznea@microchip.com>
+Date: Wed, 26 Jun 2019 15:36:51 +0300
+Subject: [PATCH] hostapd cli UNKNOWN-COMMAND
+
+Signed-off-by: Claudiu Beznea <claudiu.beznea@microchip.com>
+---
+ hostapd/hostapd_cli.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/hostapd/hostapd_cli.c b/hostapd/hostapd_cli.c
+index fbec5d24612d..7a4c96ee4b3c 100644
 --- a/hostapd/hostapd_cli.c
 +++ b/hostapd/hostapd_cli.c
-@@ -743,7 +743,7 @@ static int wpa_ctrl_command_sta(struct w
+@@ -743,7 +743,7 @@ static int wpa_ctrl_command_sta(struct wpa_ctrl *ctrl, const char *cmd,
  	}
  
  	buf[len] = '\0';
@@ -9,3 +21,6 @@
  		return -1;
  	if (print)
  		printf("%s", buf);
+-- 
+2.21.0
+

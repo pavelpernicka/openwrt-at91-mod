@@ -1,6 +1,18 @@
+From 03f9b6d059408522f12c90910256524c6830f271 Mon Sep 17 00:00:00 2001
+From: Claudiu Beznea <claudiu.beznea@microchip.com>
+Date: Wed, 26 Jun 2019 15:30:40 +0300
+Subject: [PATCH] rescan immediately
+
+Signed-off-by: Claudiu Beznea <claudiu.beznea@microchip.com>
+---
+ wpa_supplicant/wpa_supplicant.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/wpa_supplicant/wpa_supplicant.c b/wpa_supplicant/wpa_supplicant.c
+index cb71e8d7ee17..64a181daf75f 100644
 --- a/wpa_supplicant/wpa_supplicant.c
 +++ b/wpa_supplicant/wpa_supplicant.c
-@@ -4248,7 +4248,7 @@ wpa_supplicant_alloc(struct wpa_supplica
+@@ -4248,7 +4248,7 @@ wpa_supplicant_alloc(struct wpa_supplicant *parent)
  	if (wpa_s == NULL)
  		return NULL;
  	wpa_s->scan_req = INITIAL_SCAN_REQ;
@@ -9,3 +21,6 @@
  	wpa_s->new_connection = 1;
  	wpa_s->parent = parent ? parent : wpa_s;
  	wpa_s->p2pdev = wpa_s->parent;
+-- 
+2.21.0
+

@@ -1,3 +1,15 @@
+From c1260b2c33e934959c81eecb4dc2339d1b6a0948 Mon Sep 17 00:00:00 2001
+From: Claudiu Beznea <claudiu.beznea@microchip.com>
+Date: Wed, 26 Jun 2019 15:21:49 +0300
+Subject: [PATCH] demonize fix
+
+Signed-off-by: Claudiu Beznea <claudiu.beznea@microchip.com>
+---
+ src/utils/os_unix.c | 68 +++++++++++++++++++--------------------------
+ 1 file changed, 28 insertions(+), 40 deletions(-)
+
+diff --git a/src/utils/os_unix.c b/src/utils/os_unix.c
+index 1894fcdb0cf2..0e4872cc5264 100644
 --- a/src/utils/os_unix.c
 +++ b/src/utils/os_unix.c
 @@ -10,6 +10,7 @@
@@ -8,7 +20,7 @@
  
  #ifdef ANDROID
  #include <sys/capability.h>
-@@ -182,59 +183,46 @@ int os_gmtime(os_time_t t, struct os_tm
+@@ -182,59 +183,46 @@ int os_gmtime(os_time_t t, struct os_tm *tm)
  	return 0;
  }
  
@@ -66,8 +78,8 @@
 -#else /* __APPLE__ */
 -#define os_daemon daemon
 -#endif /* __APPLE__ */
- 
 -
+ 
 -int os_daemonize(const char *pid_file)
 -{
 -#if defined(__uClinux__) || defined(__sun__)
@@ -95,3 +107,6 @@
  
  	return -0;
  #endif /* defined(__uClinux__) || defined(__sun__) */
+-- 
+2.21.0
+

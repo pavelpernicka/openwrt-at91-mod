@@ -1,6 +1,18 @@
+From 0e3562bb2aef203247d44f02b7c33393d17c33ae Mon Sep 17 00:00:00 2001
+From: Claudiu Beznea <claudiu.beznea@microchip.com>
+Date: Wed, 26 Jun 2019 15:34:17 +0300
+Subject: [PATCH] nl80211 del beacon bss
+
+Signed-off-by: Claudiu Beznea <claudiu.beznea@microchip.com>
+---
+ src/drivers/driver_nl80211.c | 15 ++++++++-------
+ 1 file changed, 8 insertions(+), 7 deletions(-)
+
+diff --git a/src/drivers/driver_nl80211.c b/src/drivers/driver_nl80211.c
+index 873bb96afe78..d0dca4018950 100644
 --- a/src/drivers/driver_nl80211.c
 +++ b/src/drivers/driver_nl80211.c
-@@ -2566,10 +2566,15 @@ static int wpa_driver_nl80211_del_beacon
+@@ -2566,10 +2566,15 @@ static int wpa_driver_nl80211_del_beacon(struct i802_bss *bss)
  	struct nl_msg *msg;
  	struct wpa_driver_nl80211_data *drv = bss->drv;
  
@@ -18,7 +30,7 @@
  	return send_and_recv_msgs(drv, msg, NULL, NULL);
  }
  
-@@ -4835,7 +4840,7 @@ static void nl80211_teardown_ap(struct i
+@@ -4835,7 +4840,7 @@ static void nl80211_teardown_ap(struct i802_bss *bss)
  		nl80211_mgmt_unsubscribe(bss, "AP teardown");
  
  	nl80211_put_wiphy_data_ap(bss);
@@ -27,7 +39,7 @@
  }
  
  
-@@ -7057,8 +7062,6 @@ static int wpa_driver_nl80211_if_remove(
+@@ -7057,8 +7062,6 @@ static int wpa_driver_nl80211_if_remove(struct i802_bss *bss,
  	} else {
  		wpa_printf(MSG_DEBUG, "nl80211: First BSS - reassign context");
  		nl80211_teardown_ap(bss);
@@ -36,7 +48,7 @@
  		nl80211_destroy_bss(bss);
  		if (!bss->added_if)
  			i802_set_iface_flags(bss, 0);
-@@ -7437,7 +7440,6 @@ static int wpa_driver_nl80211_deinit_ap(
+@@ -7437,7 +7440,6 @@ static int wpa_driver_nl80211_deinit_ap(void *priv)
  	if (!is_ap_interface(drv->nlmode))
  		return -1;
  	wpa_driver_nl80211_del_beacon(bss);
@@ -44,7 +56,7 @@
  
  	/*
  	 * If the P2P GO interface was dynamically added, then it is
-@@ -7457,7 +7459,6 @@ static int wpa_driver_nl80211_stop_ap(vo
+@@ -7457,7 +7459,6 @@ static int wpa_driver_nl80211_stop_ap(void *priv)
  	if (!is_ap_interface(drv->nlmode))
  		return -1;
  	wpa_driver_nl80211_del_beacon(bss);
@@ -52,3 +64,6 @@
  	return 0;
  }
  
+-- 
+2.21.0
+

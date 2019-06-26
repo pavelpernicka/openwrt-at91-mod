@@ -1,6 +1,18 @@
+From b6bbe57269310872ad151edb435916302a46b746 Mon Sep 17 00:00:00 2001
+From: Claudiu Beznea <claudiu.beznea@microchip.com>
+Date: Wed, 26 Jun 2019 15:27:12 +0300
+Subject: [PATCH] disable bridge packet workaround
+
+Signed-off-by: Claudiu Beznea <claudiu.beznea@microchip.com>
+---
+ src/l2_packet/l2_packet_linux.c | 3 +--
+ 1 file changed, 1 insertion(+), 2 deletions(-)
+
+diff --git a/src/l2_packet/l2_packet_linux.c b/src/l2_packet/l2_packet_linux.c
+index 291c9dd263a6..d38eedd2abce 100644
 --- a/src/l2_packet/l2_packet_linux.c
 +++ b/src/l2_packet/l2_packet_linux.c
-@@ -360,8 +360,7 @@ struct l2_packet_data * l2_packet_init_b
+@@ -360,8 +360,7 @@ struct l2_packet_data * l2_packet_init_bridge(
  
  	l2 = l2_packet_init(br_ifname, own_addr, protocol, rx_callback,
  			    rx_callback_ctx, l2_hdr);
@@ -10,3 +22,6 @@
  
  #ifndef CONFIG_NO_LINUX_PACKET_SOCKET_WAR
  	/*
+-- 
+2.21.0
+

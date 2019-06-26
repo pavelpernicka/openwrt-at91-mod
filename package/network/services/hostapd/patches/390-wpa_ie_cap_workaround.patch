@@ -1,3 +1,15 @@
+From 0bda2f19de553d08ad2af0d40ef3f54e99e4b429 Mon Sep 17 00:00:00 2001
+From: Claudiu Beznea <claudiu.beznea@microchip.com>
+Date: Wed, 26 Jun 2019 15:47:51 +0300
+Subject: [PATCH] wpa ie cap workaround
+
+Signed-off-by: Claudiu Beznea <claudiu.beznea@microchip.com>
+---
+ src/common/wpa_common.c | 40 ++++++++++++++++++++++++++++++++++++++--
+ 1 file changed, 38 insertions(+), 2 deletions(-)
+
+diff --git a/src/common/wpa_common.c b/src/common/wpa_common.c
+index 6587b29c455a..4d8c49c7f8b6 100644
 --- a/src/common/wpa_common.c
 +++ b/src/common/wpa_common.c
 @@ -1849,6 +1849,31 @@ u32 wpa_akm_to_suite(int akm)
@@ -32,7 +44,7 @@
  int wpa_compare_rsn_ie(int ft_initial_assoc,
  		       const u8 *ie1, size_t ie1len,
  		       const u8 *ie2, size_t ie2len)
-@@ -1856,8 +1881,19 @@ int wpa_compare_rsn_ie(int ft_initial_as
+@@ -1856,8 +1881,19 @@ int wpa_compare_rsn_ie(int ft_initial_assoc,
  	if (ie1 == NULL || ie2 == NULL)
  		return -1;
  
@@ -54,3 +66,6 @@
  
  #ifdef CONFIG_IEEE80211R
  	if (ft_initial_assoc) {
+-- 
+2.21.0
+

@@ -1,6 +1,18 @@
+From b1b64c32038ff56036bc6a22a2a74cdbc2ecf31e Mon Sep 17 00:00:00 2001
+From: Claudiu Beznea <claudiu.beznea@microchip.com>
+Date: Wed, 26 Jun 2019 15:33:40 +0300
+Subject: [PATCH] reload freq change
+
+Signed-off-by: Claudiu Beznea <claudiu.beznea@microchip.com>
+---
+ src/ap/hostapd.c | 43 +++++++++++++++++++++++++++++++------------
+ 1 file changed, 31 insertions(+), 12 deletions(-)
+
+diff --git a/src/ap/hostapd.c b/src/ap/hostapd.c
+index 42e82cdec532..8a2f35e5a4a7 100644
 --- a/src/ap/hostapd.c
 +++ b/src/ap/hostapd.c
-@@ -93,6 +93,25 @@ static void hostapd_reload_bss(struct ho
+@@ -93,6 +93,25 @@ static void hostapd_reload_bss(struct hostapd_data *hapd)
  #endif /* CONFIG_NO_RADIUS */
  
  	ssid = &hapd->conf->ssid;
@@ -26,7 +38,7 @@
  	if (!ssid->wpa_psk_set && ssid->wpa_psk && !ssid->wpa_psk->next &&
  	    ssid->wpa_passphrase_set && ssid->wpa_passphrase) {
  		/*
-@@ -171,6 +190,7 @@ int hostapd_reload_config(struct hostapd
+@@ -171,6 +190,7 @@ int hostapd_reload_config(struct hostapd_iface *iface)
  	struct hostapd_data *hapd = iface->bss[0];
  	struct hostapd_config *newconf, *oldconf;
  	size_t j;
@@ -34,7 +46,7 @@
  
  	if (iface->config_fname == NULL) {
  		/* Only in-memory config in use - assume it has been updated */
-@@ -192,21 +212,20 @@ int hostapd_reload_config(struct hostapd
+@@ -192,21 +212,20 @@ int hostapd_reload_config(struct hostapd_iface *iface)
  	oldconf = hapd->iconf;
  	iface->conf = newconf;
  
@@ -67,3 +79,6 @@
  		hapd->conf = newconf->bss[j];
  		hostapd_reload_bss(hapd);
  	}
+-- 
+2.21.0
+

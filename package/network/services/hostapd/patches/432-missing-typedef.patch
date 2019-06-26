@@ -1,3 +1,15 @@
+From 3a74a2a31961eadb67707361f328c81aee2745d6 Mon Sep 17 00:00:00 2001
+From: Claudiu Beznea <claudiu.beznea@microchip.com>
+Date: Wed, 26 Jun 2019 15:51:46 +0300
+Subject: [PATCH] missing typedef
+
+Signed-off-by: Claudiu Beznea <claudiu.beznea@microchip.com>
+---
+ src/drivers/linux_wext.h | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/src/drivers/linux_wext.h b/src/drivers/linux_wext.h
+index e7c7001e1cea..1cb890974690 100644
 --- a/src/drivers/linux_wext.h
 +++ b/src/drivers/linux_wext.h
 @@ -26,6 +26,7 @@ typedef int32_t __s32;
@@ -8,3 +20,6 @@
  #ifndef __user
  #define __user
  #endif /* __user */
+-- 
+2.21.0
+

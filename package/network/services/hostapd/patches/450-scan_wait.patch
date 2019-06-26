@@ -1,3 +1,15 @@
+From c498c158d288a7736ad6f7e18b2641a671a8d489 Mon Sep 17 00:00:00 2001
+From: Claudiu Beznea <claudiu.beznea@microchip.com>
+Date: Wed, 26 Jun 2019 15:56:36 +0300
+Subject: [PATCH] scan_wait
+
+Signed-off-by: Claudiu Beznea <claudiu.beznea@microchip.com>
+---
+ hostapd/main.c | 29 +++++++++++++----------------
+ 1 file changed, 13 insertions(+), 16 deletions(-)
+
+diff --git a/hostapd/main.c b/hostapd/main.c
+index 95b92028eadb..618e54310805 100644
 --- a/hostapd/main.c
 +++ b/hostapd/main.c
 @@ -38,6 +38,8 @@ struct hapd_global {
@@ -9,7 +21,7 @@
  
  
  #ifndef CONFIG_NO_HOSTAPD_LOGGER
-@@ -148,6 +150,14 @@ static void hostapd_logger_cb(void *ctx,
+@@ -148,6 +150,14 @@ static void hostapd_logger_cb(void *ctx, const u8 *addr, unsigned int module,
  }
  #endif /* CONFIG_NO_HOSTAPD_LOGGER */
  
@@ -24,7 +36,7 @@
  
  /**
   * hostapd_driver_init - Preparate driver interface
-@@ -166,6 +176,8 @@ static int hostapd_driver_init(struct ho
+@@ -166,6 +176,8 @@ static int hostapd_driver_init(struct hostapd_iface *iface)
  		return -1;
  	}
  
@@ -33,7 +45,7 @@
  	/* Initialize the driver interface */
  	if (!(b[0] | b[1] | b[2] | b[3] | b[4] | b[5]))
  		b = NULL;
-@@ -406,8 +418,6 @@ static void hostapd_global_deinit(const
+@@ -406,8 +418,6 @@ static void hostapd_global_deinit(const char *pid_file, int eloop_initialized)
  #endif /* CONFIG_NATIVE_WINDOWS */
  
  	eap_server_unregister_methods();
@@ -42,7 +54,7 @@
  }
  
  
-@@ -433,18 +443,6 @@ static int hostapd_global_run(struct hap
+@@ -433,18 +443,6 @@ static int hostapd_global_run(struct hapd_interfaces *ifaces, int daemonize,
  	}
  #endif /* EAP_SERVER_TNC */
  
@@ -71,3 +83,6 @@
  	const char *log_file = NULL;
  	const char *entropy_file = NULL;
  	char **bss_config = NULL, **tmp_bss;
+-- 
+2.21.0
+

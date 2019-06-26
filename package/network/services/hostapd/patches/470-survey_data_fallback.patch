@@ -1,6 +1,18 @@
+From 15140d1237d5063167a6d6e2223760122d42b43c Mon Sep 17 00:00:00 2001
+From: Claudiu Beznea <claudiu.beznea@microchip.com>
+Date: Wed, 26 Jun 2019 15:58:58 +0300
+Subject: [PATCH] survey_data_fallback
+
+Signed-off-by: Claudiu Beznea <claudiu.beznea@microchip.com>
+---
+ src/ap/acs.c | 13 +++----------
+ 1 file changed, 3 insertions(+), 10 deletions(-)
+
+diff --git a/src/ap/acs.c b/src/ap/acs.c
+index 6d4c0416dd42..54925fd6a356 100644
 --- a/src/ap/acs.c
 +++ b/src/ap/acs.c
-@@ -292,18 +292,12 @@ static void acs_fail(struct hostapd_ifac
+@@ -292,18 +292,12 @@ static void acs_fail(struct hostapd_iface *iface)
  static long double
  acs_survey_interference_factor(struct freq_survey *survey, s8 min_nf)
  {
@@ -20,7 +32,7 @@
  
  	total = survey->channel_time;
  
-@@ -392,20 +386,19 @@ static int acs_usable_vht80_chan(struct
+@@ -392,20 +386,19 @@ static int acs_usable_vht80_chan(struct hostapd_channel_data *chan)
  static int acs_survey_is_sufficient(struct freq_survey *survey)
  {
  	if (!(survey->filled & SURVEY_HAS_NF)) {
@@ -43,3 +55,6 @@
  	}
  
  	return 1;
+-- 
+2.21.0
+
