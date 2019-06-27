@@ -58,3 +58,6 @@ CONFIG_PACKAGE_bluez-libs=y
 CONFIG_PACKAGE_bluez-daemon=y
 CONFIG_PACKAGE_bluez-examples=y
 CONFIG_PACKAGE_bluez-utils=y
+CONFIG_PACKAGE_kmod-dsa=y
+CONFIG_PACKAGE_kmod-of-mdio=y
+CONFIG_PACKAGE_kmod-dsa-ksz9477=y
