@@ -1,16 +1,3 @@
-From 2808a4b53df87971a4d45bdeb82196d171ae93cc Mon Sep 17 00:00:00 2001
-From: Claudiu Beznea <claudiu.beznea@microchip.com>
-Date: Wed, 26 Jun 2019 15:34:55 +0300
-Subject: [PATCH] ctrl iface reload
-
-Signed-off-by: Claudiu Beznea <claudiu.beznea@microchip.com>
----
- hostapd/ctrl_iface.c   | 59 ++++++++++++++++++++++++++++++++++++++++++
- src/ap/ctrl_iface_ap.c |  8 +++++-
- 2 files changed, 66 insertions(+), 1 deletion(-)
-
-diff --git a/hostapd/ctrl_iface.c b/hostapd/ctrl_iface.c
-index cef2976bd534..0ee1957f0394 100644
 --- a/hostapd/ctrl_iface.c
 +++ b/hostapd/ctrl_iface.c
 @@ -60,6 +60,7 @@
@@ -21,7 +8,7 @@ index cef2976bd534..0ee1957f0394 100644
  
  
  #define HOSTAPD_CLI_DUP_VALUE_MAX_LEN 256
-@@ -78,6 +79,7 @@ static void hostapd_ctrl_iface_send(struct hostapd_data *hapd, int level,
+@@ -78,6 +79,7 @@ static void hostapd_ctrl_iface_send(stru
  				    enum wpa_msg_type type,
  				    const char *buf, size_t len);
  
@@ -29,7 +16,7 @@ index cef2976bd534..0ee1957f0394 100644
  
  static int hostapd_ctrl_iface_attach(struct hostapd_data *hapd,
  				     struct sockaddr_storage *from,
-@@ -129,6 +131,61 @@ static int hostapd_ctrl_iface_new_sta(struct hostapd_data *hapd,
+@@ -129,6 +131,61 @@ static int hostapd_ctrl_iface_new_sta(st
  	return 0;
  }
  
@@ -91,7 +78,7 @@ index cef2976bd534..0ee1957f0394 100644
  
  #ifdef CONFIG_IEEE80211W
  #ifdef NEED_AP_MLME
-@@ -3031,6 +3088,8 @@ static int hostapd_ctrl_iface_receive_process(struct hostapd_data *hapd,
+@@ -3031,6 +3088,8 @@ static int hostapd_ctrl_iface_receive_pr
  	} else if (os_strncmp(buf, "VENDOR ", 7) == 0) {
  		reply_len = hostapd_ctrl_iface_vendor(hapd, buf + 7, reply,
  						      reply_size);
@@ -100,11 +87,9 @@ index cef2976bd534..0ee1957f0394 100644
  	} else if (os_strcmp(buf, "ERP_FLUSH") == 0) {
  		ieee802_1x_erp_flush(hapd);
  #ifdef RADIUS_SERVER
-diff --git a/src/ap/ctrl_iface_ap.c b/src/ap/ctrl_iface_ap.c
-index 21b813ee18d7..b6aa8c983478 100644
 --- a/src/ap/ctrl_iface_ap.c
 +++ b/src/ap/ctrl_iface_ap.c
-@@ -864,7 +864,13 @@ int hostapd_parse_csa_settings(const char *pos,
+@@ -864,7 +864,13 @@ int hostapd_parse_csa_settings(const cha
  
  int hostapd_ctrl_iface_stop_ap(struct hostapd_data *hapd)
  {
@@ -119,6 +104,3 @@ index 21b813ee18d7..b6aa8c983478 100644
  }
  
  
--- 
-2.21.0
-

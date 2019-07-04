@@ -1,18 +1,6 @@
-From 480df357f0bc108a615230c16bdf4ca51e91bda5 Mon Sep 17 00:00:00 2001
-From: Claudiu Beznea <claudiu.beznea@microchip.com>
-Date: Wed, 26 Jun 2019 15:26:04 +0300
-Subject: [PATCH] no_eapol fix
-
-Signed-off-by: Claudiu Beznea <claudiu.beznea@microchip.com>
----
- wpa_supplicant/wpa_supplicant.c | 3 ++-
- 1 file changed, 2 insertions(+), 1 deletion(-)
-
-diff --git a/wpa_supplicant/wpa_supplicant.c b/wpa_supplicant/wpa_supplicant.c
-index f6bfc62891d1..263b8aeeb0cb 100644
 --- a/wpa_supplicant/wpa_supplicant.c
 +++ b/wpa_supplicant/wpa_supplicant.c
-@@ -292,9 +292,10 @@ void wpa_supplicant_cancel_auth_timeout(struct wpa_supplicant *wpa_s)
+@@ -292,9 +292,10 @@ void wpa_supplicant_cancel_auth_timeout(
   */
  void wpa_supplicant_initiate_eapol(struct wpa_supplicant *wpa_s)
  {
@@ -24,6 +12,3 @@ index f6bfc62891d1..263b8aeeb0cb 100644
  
  #ifdef CONFIG_IBSS_RSN
  	if (ssid->mode == WPAS_MODE_IBSS &&
--- 
-2.21.0
-

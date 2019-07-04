@@ -1,18 +1,6 @@
-From 922e7748d021b32f15a0eb7588c3d2b71e59610c Mon Sep 17 00:00:00 2001
-From: Claudiu Beznea <claudiu.beznea@microchip.com>
-Date: Wed, 26 Jun 2019 15:58:08 +0300
-Subject: [PATCH] fix mesh obss check
-
-Signed-off-by: Claudiu Beznea <claudiu.beznea@microchip.com>
----
- wpa_supplicant/wpa_supplicant.c | 8 +++++---
- 1 file changed, 5 insertions(+), 3 deletions(-)
-
-diff --git a/wpa_supplicant/wpa_supplicant.c b/wpa_supplicant/wpa_supplicant.c
-index edb63cfabad0..1941fd310855 100644
 --- a/wpa_supplicant/wpa_supplicant.c
 +++ b/wpa_supplicant/wpa_supplicant.c
-@@ -2124,11 +2124,13 @@ void ibss_mesh_setup_freq(struct wpa_supplicant *wpa_s,
+@@ -2124,11 +2124,13 @@ void ibss_mesh_setup_freq(struct wpa_sup
  	for (j = 0; j < wpa_s->last_scan_res_used; j++) {
  		struct wpa_bss *bss = wpa_s->last_scan_res[j];
  
@@ -29,6 +17,3 @@ index edb63cfabad0..1941fd310855 100644
  			break;
  
  		if (!bss_is_ibss(bss))
--- 
-2.21.0
-

@@ -1,16 +1,3 @@
-From d807b4f3518c2515a5ae1f0a65465bb420af3346 Mon Sep 17 00:00:00 2001
-From: Claudiu Beznea <claudiu.beznea@microchip.com>
-Date: Wed, 26 Jun 2019 15:31:31 +0300
-Subject: [PATCH] optional rfkill
-
-Signed-off-by: Claudiu Beznea <claudiu.beznea@microchip.com>
----
- src/drivers/drivers.mak |  4 +---
- src/drivers/rfkill.h    | 16 ++++++++++++++++
- 2 files changed, 17 insertions(+), 3 deletions(-)
-
-diff --git a/src/drivers/drivers.mak b/src/drivers/drivers.mak
-index 1496b47d0ad5..d8f961aca6d0 100644
 --- a/src/drivers/drivers.mak
 +++ b/src/drivers/drivers.mak
 @@ -49,7 +49,6 @@ NEED_SME=y
@@ -45,8 +32,6 @@ index 1496b47d0ad5..d8f961aca6d0 100644
  endif
  
  ifdef NEED_RADIOTAP
-diff --git a/src/drivers/rfkill.h b/src/drivers/rfkill.h
-index 0412ac33054c..e27565375bf5 100644
 --- a/src/drivers/rfkill.h
 +++ b/src/drivers/rfkill.h
 @@ -18,8 +18,24 @@ struct rfkill_config {
@@ -74,6 +59,3 @@ index 0412ac33054c..e27565375bf5 100644
 +#endif
  
  #endif /* RFKILL_H */
--- 
-2.21.0
-

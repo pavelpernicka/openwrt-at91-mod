@@ -1,18 +1,6 @@
-From 994090b62980daadca1e2e3a6ed73385436570a6 Mon Sep 17 00:00:00 2001
-From: Claudiu Beznea <claudiu.beznea@microchip.com>
-Date: Wed, 26 Jun 2019 15:48:31 +0300
-Subject: [PATCH] wps single auth enc type
-
-Signed-off-by: Claudiu Beznea <claudiu.beznea@microchip.com>
----
- src/ap/wps_hostapd.c | 6 ++----
- 1 file changed, 2 insertions(+), 4 deletions(-)
-
-diff --git a/src/ap/wps_hostapd.c b/src/ap/wps_hostapd.c
-index 5ec019971f37..5af7abe7e712 100644
 --- a/src/ap/wps_hostapd.c
 +++ b/src/ap/wps_hostapd.c
-@@ -346,8 +346,7 @@ static int hapd_wps_reconfig_in_memory(struct hostapd_data *hapd,
+@@ -346,8 +346,7 @@ static int hapd_wps_reconfig_in_memory(s
  				bss->wpa_pairwise |= WPA_CIPHER_GCMP;
  			else
  				bss->wpa_pairwise |= WPA_CIPHER_CCMP;
@@ -22,7 +10,7 @@ index 5ec019971f37..5af7abe7e712 100644
  			bss->wpa_pairwise |= WPA_CIPHER_TKIP;
  		bss->rsn_pairwise = bss->wpa_pairwise;
  		bss->wpa_group = wpa_select_ap_group_cipher(bss->wpa,
-@@ -1069,8 +1068,7 @@ int hostapd_init_wps(struct hostapd_data *hapd,
+@@ -1069,8 +1068,7 @@ int hostapd_init_wps(struct hostapd_data
  					  WPA_CIPHER_GCMP_256)) {
  			wps->encr_types |= WPS_ENCR_AES;
  			wps->encr_types_rsn |= WPS_ENCR_AES;
@@ -32,6 +20,3 @@ index 5ec019971f37..5af7abe7e712 100644
  			wps->encr_types |= WPS_ENCR_TKIP;
  			wps->encr_types_rsn |= WPS_ENCR_TKIP;
  		}
--- 
-2.21.0
-
