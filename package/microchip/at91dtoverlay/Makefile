@@ -9,12 +9,12 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=at91dtoverlay
-PKG_VERSION:=linux4sam_6.1-rc2
+PKG_VERSION:=linux4sam_6.1
 PKG_RELEASE:=
 
 PKG_SOURCE_PROTO:=git
 PKG_SOURCE_URL:=https://github.com/linux4sam/dt-overlay-at91.git
-PKG_SOURCE_VERSION:=d0941067f1d6323ee24fda95efa3042d4a1312d1
+PKG_SOURCE_VERSION:=f4c5a9ad0122eafe410ee2f6e9d01f9bdf1420db
 
 PKG_BUILD_DIR=$(BUILD_DIR)/$(PKG_NAME)-$(PKG_VERSION)
 
