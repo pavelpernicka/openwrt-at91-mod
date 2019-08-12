@@ -569,34 +569,6 @@ define Device/mqmaker_witi-256m
 endef
 TARGET_DEVICES += mqmaker_witi-256m
 
-define Device/mqmaker_witi-512m
-  DTS := WITI-512M
-  IMAGE_SIZE := $(ralink_default_fw_size_16M)
-  DEVICE_TITLE := MQmaker WiTi (512MB RAM)
-  DEVICE_PACKAGES := \
-	kmod-ata-core kmod-ata-ahci kmod-mt76x2 kmod-sdhci-mt7620 kmod-usb3 \
-	kmod-usb-ledtrig-usbport wpad-basic
-endef
-TARGET_DEVICES += mqmaker_witi-512m
-
-define Device/wndr3700v5
-  DTS := WNDR3700V5
-  BLOCKSIZE := 64k
-  IMAGE_SIZE := 15232k
-  SERCOMM_HWID := AYB
-  SERCOMM_HWVER := A001
-  SERCOMM_SWVER := 0x1054
-  IMAGES += factory.img
-  IMAGE/default := append-kernel | pad-to $$$$(BLOCKSIZE) | append-rootfs | pad-rootfs
-  IMAGE/sysupgrade.bin := $$(IMAGE/default) | append-metadata | check-size $$$$(IMAGE_SIZE)
-  IMAGE/factory.img := pad-extra 320k | $$(IMAGE/default) | pad-to $$$$(BLOCKSIZE) | \
-	sercom-footer | pad-to 128 | zip WNDR3700v5.bin | sercom-seal
-  DEVICE_TITLE := Netgear WNDR3700v5
-  DEVICE_PACKAGES := \
-	kmod-mt7603 kmod-mt76x2 kmod-usb3 kmod-usb-ledtrig-usbport wpad-basic
-endef
-TARGET_DEVICES += wndr3700v5
-
 define Device/youhua_wr1200js
   DTS := WR1200JS
   IMAGE_SIZE := 16064k

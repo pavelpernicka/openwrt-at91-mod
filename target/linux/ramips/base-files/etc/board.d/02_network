@@ -388,10 +388,13 @@ ramips_setup_interfaces()
 		ucidef_add_switch "switch0" \
 			"0:lan:4" "1:lan:3" "2:lan:2" "3:lan:1" "5:wan" "6@eth0"
 		;;
-	dlink,dir-510l|\
-	glinet,vixmini|\
-	netgear,ex6150|\
-	re350-v1)
+	phicomm,psg1218b)
+		ucidef_add_switch "switch0" \
+			"0:lan:3" "1:lan:2" "2:lan:1" "3:wan" "6@eth0"
+		;;
+	planex,mzk-dp150n|\
+	vocore,vocore-8m|\
+	vocore,vocore-16m)
 		ucidef_add_switch "switch0" \
 			"0:lan" "6@eth0"
 		;;
@@ -429,24 +432,7 @@ ramips_setup_interfaces()
 		ucidef_add_switch "switch0" \
 			"0:lan" "2:lan" "6t@eth0"
 		;;
-	f5d8235-v1|\
-	f5d8235-v2|\
-	tew-714tru|\
-	v11st-fe|\
-	wzr-agl300nh)
-		ucidef_add_switch "switch0" \
-			"1:lan" "2:lan" "3:lan" "4:lan" "0:wan" "5@eth0"
-		;;
-	wcr-150gn|\
-	we1026-5g-16m)
-		ucidef_add_switch "switch0" \
-			"0:lan" "6t@eth0"
-		;;
-	whr-1166d)
-		ucidef_add_switch "switch0" \
-			"0:lan" "1:lan" "2:lan" "3:lan" "5:wan" "6@eth0"
-		;;
-	wizfi630a)
+	wiznet,wizfi630a)
 		ucidef_add_switch "switch0" \
 			"0:lan" "1:lan" "2:wan" "6@eth0"
 		;;
