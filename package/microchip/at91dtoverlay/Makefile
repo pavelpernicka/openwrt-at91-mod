@@ -50,6 +50,12 @@ define AT91DTOverlay/sama5d27_som1_ek
   BUILD_DEVICES:=at91-sama5d27_som1_ek
 endef
 
+define AT91DTOverlay/sama5d27_wlsom1_ek
+  TITLE:=AT91DTOverlay for SAMA5D27 WLSOM1 EK
+  BUILD_SUBTARGET:=sama5
+  BUILD_DEVICES:=at91-sama5d27_wlsom1_ek
+endef
+
 define AT91DTOverlay/sama5d2_icp
   TITLE:=AT91DTOverlay for SAMA5D2 ICP
   BUILD_SUBTARGET:=sama5
@@ -61,6 +67,7 @@ AT91DTOVERLAY_TARGETS := \
     sama5d3_xplained \
     sama5d4_xplained \
     sama5d27_som1_ek \
+    sama5d27_wlsom1_ek \
     sama5d2_icp
 
 define Build/Compile

@@ -82,6 +82,9 @@ at91_board_detect() {
 	*"Ethernut 5")
 		name="ethernut5"
 		;;
+	*"Microchip SAMA5D27 WLSOM1 EK")
+		name="sama5d27_wlsom1_ek"
+		;;
 	esac
 
 	[ -z "$name" ] && name="unknown"
