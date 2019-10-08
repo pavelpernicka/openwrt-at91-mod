@@ -1,5 +1,6 @@
 BOARDNAME:=Legacy (ARMv5)
 CPU_TYPE:=arm926ej-s
+SUBTARGET:=legacy
 
 define Target/Description
 	Build generic firmware for legacy Atmel AT91 platforms
