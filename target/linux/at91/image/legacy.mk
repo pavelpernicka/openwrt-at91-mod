@@ -59,13 +59,17 @@ define Device/at91sam9x35ek
 endef
 TARGET_DEVICES += at91sam9x35ek
 
-define Device/lmu5000
-  $(Device/production)
-  DEVICE_TITLE := CalAmp LMU5000
-  DEVICE_PACKAGES := kmod-rtc-pcf2123 kmod-usb-acm kmod-usb-serial \
-    kmod-usb-serial-option kmod-usb-serial-sierrawireless kmod-gpio-mcp23s08
-endef
-TARGET_DEVICES += lmu5000
+ifeq ($(strip $(CONFIG_EXTERNAL_KERNEL_TREE)),"")
+  ifeq ($(strip $(CONFIG_KERNEL_GIT_CLONE_URI)),"")
+    define Device/lmu5000
+      $(Device/production)
+      DEVICE_TITLE := CalAmp LMU5000
+      DEVICE_PACKAGES := kmod-rtc-pcf2123 kmod-usb-acm kmod-usb-serial \
+        kmod-usb-serial-option kmod-usb-serial-sierrawireless kmod-gpio-mcp23s08
+    endef
+    TARGET_DEVICES += lmu5000
+  endif
+endif
 
 define Device/tny_a9260
   $(Device/production-dtb)
@@ -117,17 +121,20 @@ define Device/at91-q5xr5
 endef
 #TARGET_DEVICES += at91-q5xr5
 
-define Device/wb45n
-  $(Device/evaluation-fit)
-  DEVICE_TITLE := Laird WB45N
-  DEVICE_PACKAGES := \
-	kmod-mmc-at91 kmod-ath6kl-sdio ath6k-firmware \
-	kmod-usb-storage kmod-fs-vfat kmod-fs-msdos \
-	kmod-leds-gpio
-  BLOCKSIZE := 128k
-  PAGESIZE := 2048
-  SUBPAGESIZE := 2048
-  MKUBIFS_OPTS := -m $$(PAGESIZE) -e 124KiB -c 955
-endef
-TARGET_DEVICES += wb45n
-
+ifeq ($(strip $(CONFIG_EXTERNAL_KERNEL_TREE)),"")
+  ifeq ($(strip $(CONFIG_KERNEL_GIT_CLONE_URI)),"")
+    define Device/wb45n
+      $(Device/evaluation-fit)
+      DEVICE_TITLE := Laird WB45N
+      DEVICE_PACKAGES := \
+	  kmod-mmc-at91 kmod-ath6kl-sdio ath6k-firmware \
+	  kmod-usb-storage kmod-fs-vfat kmod-fs-msdos \
+	  kmod-leds-gpio
+      BLOCKSIZE := 128k
+      PAGESIZE := 2048
+      SUBPAGESIZE := 2048
+      MKUBIFS_OPTS := -m $$(PAGESIZE) -e 124KiB -c 955
+    endef
+    TARGET_DEVICES += wb45n
+  endif
+endif
