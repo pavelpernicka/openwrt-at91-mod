@@ -59,6 +59,13 @@ define Device/at91sam9x35ek
 endef
 TARGET_DEVICES += at91sam9x35ek
 
+define Device/at91-sam9x60ek
+  $(Device/evaluation-dtb)
+  DEVICE_TITLE := Microchip SAM9X60-EK
+  $(Device/evaluation-sdimage)
+endef
+TARGET_DEVICES += at91-sam9x60ek
+
 ifeq ($(strip $(CONFIG_EXTERNAL_KERNEL_TREE)),"")
   ifeq ($(strip $(CONFIG_KERNEL_GIT_CLONE_URI)),"")
     define Device/lmu5000
