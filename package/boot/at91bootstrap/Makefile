@@ -28,6 +28,18 @@ define AT91Bootstrap/Default
   AT91BOOTSTRAP_IMAGE:=at91bootstrap.bin
 endef
 
+define AT91Bootstrap/sam9x60eksd_uboot
+  TITLE:=AT91Bootstrap for SAM9X60-EK board (SDcard)
+  BUILD_SUBTARGET:=sam9x
+  BUILD_DEVICES:=at91-sam9x60ek
+endef
+
+define AT91Bootstrap/sam9x60eknf_uboot
+  TITLE:=AT91Bootstrap for SAM9X60-EK board (Nand Flash)
+  BUILD_SUBTARGET:=sam9x
+  BUILD_DEVICES:=at91-sam9x60ek
+endef
+
 define AT91Bootstrap/sama5d2_xplaineddf_uboot
   TITLE:=AT91Bootstrap for SAMA5D2 Xplained board (SPI Flash)
   BUILD_SUBTARGET:=sama5
@@ -125,6 +137,8 @@ define AT91Bootstrap/sama5d2_icpsd_uboot
 endef
 
 AT91BOOTSTRAP_TARGETS := \
+    sam9x60eksd_uboot \
+    sam9x60eknf_uboot \
     sama5d2_xplaineddf_uboot \
     sama5d2_xplaineddf_qspi_uboot \
     sama5d2_xplainedsd_uboot \

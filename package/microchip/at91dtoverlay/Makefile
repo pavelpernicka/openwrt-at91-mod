@@ -26,6 +26,12 @@ define AT91DTOverlay/Default
   BUILD_TARGET:=at91
 endef
 
+define AT91DTOverlay/sam9x60ek
+  TITLE:=AT91DTOverlay for SAM9X60-EK board
+  BUILD_SUBTARGET:=sam9x
+  BUILD_DEVICES:=at91-sam9x60ek
+endef
+
 define AT91DTOverlay/sama5d2_xplained
   TITLE:=AT91DTOverlay for SAMA5D2 Xplained board
   BUILD_SUBTARGET:=sama5
@@ -63,6 +69,7 @@ define AT91DTOverlay/sama5d2_icp
 endef
 
 AT91DTOVERLAY_TARGETS := \
+    sam9x60ek \
     sama5d2_xplained \
     sama5d3_xplained \
     sama5d4_xplained \

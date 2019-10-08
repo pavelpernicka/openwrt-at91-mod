@@ -38,6 +38,18 @@ define U-Boot/at91sam9x5ek_nandflash
 				 at91sam9x35ek
 endef
 
+define U-Boot/sam9x60ek_mmc
+  NAME:=SAM9X60-EK board (SDcard)
+  BUILD_SUBTARGET:=sam9x
+  BUILD_DEVICES:=at91-sam9x60ek
+endef
+
+define U-Boot/sam9x60ek_nandflash
+  NAME:=SAM9X60-EK board (Nand Flash)
+  BUILD_SUBTARGET:=sam9x
+  BUILD_DEVICES:=at91-sam9x60ek
+endef
+
 define U-Boot/sama5d3_xplained_nandflash
   NAME:=SAMA5D3 Xplained board (NandFlash)
   BUILD_SUBTARGET:=sama5
@@ -125,6 +137,8 @@ endef
 UBOOT_TARGETS := \
 	at91sam9m10g45ek_nandflash \
 	at91sam9x5ek_nandflash \
+	sam9x60ek_mmc \
+	sam9x60ek_nandflash \
 	sama5d3_xplained_nandflash \
 	sama5d3_xplained_mmc \
 	sama5d2_xplained_mmc \
