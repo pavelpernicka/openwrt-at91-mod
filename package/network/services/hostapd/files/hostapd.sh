@@ -254,7 +254,7 @@ hostapd_set_bss_options() {
 
 	wireless_vif_parse_encryption
 
-	local bss_conf
+	local bss_conf bss_md5sum
 	local wep_rekey wpa_group_rekey wpa_pair_rekey wpa_master_rekey wpa_key_mgmt
 
 	json_get_vars \
@@ -627,6 +627,9 @@ hostapd_set_bss_options() {
 		}
 	}
 
+	bss_md5sum=$(echo $bss_conf | md5sum | cut -d" " -f1)
+	append bss_conf "config_id=$bss_md5sum" "$N"
+
 	append "$var" "$bss_conf" "$N"
 	return 0
 }
@@ -950,11 +953,11 @@ EOF
 }
 
 wpa_supplicant_run() {
-	local ifname="$1"; shift
+	local ifname="$1"
+	local hostapd_ctrl="$2"
 
 	_wpa_supplicant_common "$ifname"
 
-	ubus wait_for wpa_supplicant.$phy
 	ubus call wpa_supplicant.$phy config_add "{ \
 		\"driver\": \"${_w_driver:-wext}\", \"ctrl\": \"$_rpath\", \
 		\"iface\": \"$ifname\", \"config\": \"$_config\" \
@@ -963,7 +966,6 @@ wpa_supplicant_run() {
 		}"
 
 	ret="$?"
-	wireless_add_process "$(cat "/var/run/wpa_supplicant-${ifname}.pid")" /usr/sbin/wpa_supplicant 1
 
 	[ "$ret" != 0 ] && wireless_setup_vif_failed WPA_SUPPLICANT_FAILED
 
@@ -974,5 +976,5 @@ wpa_supplicant_run() {
 }
 
 hostapd_common_cleanup() {
-	killall hostapd wpa_supplicant meshd-nl80211
+	killall meshd-nl80211
 }
