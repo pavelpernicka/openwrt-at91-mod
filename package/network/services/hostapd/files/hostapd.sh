@@ -958,6 +958,7 @@ wpa_supplicant_run() {
 
 	_wpa_supplicant_common "$ifname"
 
+	ubus wait_for wpa_supplicant.$phy
 	ubus call wpa_supplicant.$phy config_add "{ \
 		\"driver\": \"${_w_driver:-wext}\", \"ctrl\": \"$_rpath\", \
 		\"iface\": \"$ifname\", \"config\": \"$_config\" \
