@@ -88,6 +88,21 @@ endef
 
 $(eval $(call KernelPackage,atmel-usba-udc))
 
+define KernelPackage/lan78xx
+  SUBMENU:=$(USB_MENU)
+  TITLE:=LAN78xx Device Driver
+  DEPENDS:=@TARGET_at91 +kmod-usb-net
+  KCONFIG:=CONFIG_USB_LAN78XX
+  FILES:=$(LINUX_DIR)/drivers/net/usb/lan78xx.ko
+  AUTOLOAD:=$(call AutoLoad,90,lan78xx)
+endef
+
+define KernelPackage/lan78xx/description
+ Kernel module for LAN 78xx devices
+endef
+
+$(eval $(call KernelPackage,lan78xx))
+
 I2C_AT91_MODULES:=\
   CONFIG_I2C_AT91:drivers/i2c/busses/i2c-at91
 
