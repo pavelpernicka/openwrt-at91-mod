@@ -115,8 +115,7 @@ define KernelPackage/geneve
 	+IPV6:kmod-udptunnel6
   KCONFIG:=CONFIG_GENEVE
   FILES:= \
-	$(LINUX_DIR)/net/ipv4/geneve.ko@le4.1 \
-	$(LINUX_DIR)/drivers/net/geneve.ko@ge4.2
+	$(LINUX_DIR)/drivers/net/geneve.ko
   AUTOLOAD:=$(call AutoLoad,13,geneve)
 endef
 
@@ -126,6 +125,23 @@ define KernelPackage/geneve/description
 endef
 
 $(eval $(call KernelPackage,geneve))
+
+
+define KernelPackage/nsh
+  SUBMENU:=$(NETWORK_SUPPORT_MENU)
+  TITLE:=Network Service Header (NSH) protocol
+  DEPENDS:=
+  KCONFIG:=CONFIG_NET_NSH
+  FILES:=$(LINUX_DIR)/net/nsh/nsh.ko
+  AUTOLOAD:=$(call AutoLoad,13,nsh)
+endef
+
+define KernelPackage/nsh/description
+  Network Service Header is an implementation of Service Function
+  Chaining (RFC 7665).  Requires kernel 4.14 or newer
+endef
+
+$(eval $(call KernelPackage,nsh))
 
 
 define KernelPackage/capi
@@ -230,7 +246,7 @@ define KernelPackage/ipsec
   DEPENDS:= \
 	+kmod-crypto-authenc +kmod-crypto-cbc +kmod-crypto-deflate \
 	+kmod-crypto-des +kmod-crypto-echainiv +kmod-crypto-hmac \
-	+kmod-crypto-iv +kmod-crypto-md5 +kmod-crypto-sha1
+	+kmod-crypto-md5 +kmod-crypto-sha1
   KCONFIG:= \
 	CONFIG_NET_KEY \
 	CONFIG_XFRM_USER \
@@ -918,7 +934,6 @@ $(eval $(call KernelPackage,sched))
 define KernelPackage/tcp-bbr
   SUBMENU:=$(NETWORK_SUPPORT_MENU)
   TITLE:=BBR TCP congestion control
-  DEPENDS:=+LINUX_4_9:kmod-sched
   KCONFIG:= \
 	CONFIG_TCP_CONG_ADVANCED=y \
 	CONFIG_TCP_CONG_BBR
@@ -932,11 +947,7 @@ define KernelPackage/tcp-bbr/description
  For kernel 4.13+, TCP internal pacing is implemented as fallback.
 endef
 
-ifdef CONFIG_LINUX_4_9
-  TCP_BBR_SYSCTL_CONF:=sysctl-tcp-bbr-k4_9.conf
-else
-  TCP_BBR_SYSCTL_CONF:=sysctl-tcp-bbr.conf
-endif
+TCP_BBR_SYSCTL_CONF:=sysctl-tcp-bbr.conf
 
 define KernelPackage/tcp-bbr/install
 	$(INSTALL_DIR) $(1)/etc/sysctl.d
@@ -1118,10 +1129,8 @@ define KernelPackage/rxrpc
 	CONFIG_RXKAD=m \
 	CONFIG_AF_RXRPC_DEBUG=n
   FILES:= \
-	$(LINUX_DIR)/net/rxrpc/af-rxrpc.ko@lt4.11 \
-	$(LINUX_DIR)/net/rxrpc/rxrpc.ko@ge4.11 \
-	$(LINUX_DIR)/net/rxrpc/rxkad.ko@lt4.7
-  AUTOLOAD:=$(call AutoLoad,30,rxkad@lt4.7 af-rxrpc.ko@lt4.11 rxrpc.ko@ge4.11)
+	$(LINUX_DIR)/net/rxrpc/rxrpc.ko
+  AUTOLOAD:=$(call AutoLoad,30,rxrpc.ko)
   DEPENDS:= +kmod-crypto-manager +kmod-crypto-pcbc +kmod-crypto-fcrypt
 endef
 
