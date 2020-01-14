@@ -9,7 +9,7 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=at91dtoverlay
-PKG_VERSION:=linux4sam_6.2-icp-rc1
+PKG_VERSION:=linux4sam_6.2-icp
 PKG_RELEASE:=
 
 PKG_SOURCE_PROTO:=git
