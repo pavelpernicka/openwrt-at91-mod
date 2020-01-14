@@ -7,12 +7,12 @@
 
 include $(TOPDIR)/rules.mk
 
-PKG_VERSION:=linux4sam_6.2-icp-rc1
+PKG_VERSION:=linux4sam_6.2-icp
 PKG_RELEASE:=1
 
 PKG_SOURCE_PROTO:=git
 PKG_SOURCE_URL:=https://github.com/linux4sam/u-boot-at91.git
-PKG_SOURCE_VERSION:=b02edf0fbac58ad92bf8bd3f0870ec71100a24cd
+PKG_SOURCE_VERSION:=2717319e09af7ce56b6404fbef8cab2fb526a7c3
 
 include $(INCLUDE_DIR)/u-boot.mk
 include $(INCLUDE_DIR)/package.mk
