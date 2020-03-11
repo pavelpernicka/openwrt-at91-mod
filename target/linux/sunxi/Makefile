@@ -12,7 +12,6 @@ BOARD:=sunxi
 BOARDNAME:=Allwinner A1x/A20/A3x
 FEATURES:=fpu usb ext4 display rtc squashfs
 SUBTARGETS:=cortexa8 cortexa7 cortexa53
-MAINTAINER:=Zoltan HERPAI <wigyori@uid0.hu>
 
 KERNEL_PATCHVER:=4.14
 KERNELNAME:=zImage dtbs
