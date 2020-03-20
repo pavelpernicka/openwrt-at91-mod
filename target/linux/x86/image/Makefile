@@ -9,8 +9,7 @@ include $(INCLUDE_DIR)/image.mk
 
 export PATH=$(TARGET_PATH):/sbin
 
-GRUB2_MODULES = biosdisk boot chain configfile ext2 linux ls part_msdos reboot serial test vga
-GRUB2_MODULES_ISO = biosdisk boot chain configfile iso9660 linux ls part_msdos reboot serial test vga
+GRUB2_VARIANT =
 GRUB_TERMINALS =
 GRUB_SERIAL_CONFIG =
 GRUB_TERMINAL_CONFIG =
@@ -19,8 +18,9 @@ GRUB_CONSOLE_CMDLINE =
 USE_ATKBD = generic 64
 
 ifneq ($(strip $(foreach subtarget,$(USE_ATKBD),$(CONFIG_TARGET_x86_$(subtarget)))),)
-  GRUB2_MODULES += at_keyboard
-  GRUB2_MODULES_ISO += at_keyboard
+  GRUB2_VARIANT := generic
+else
+  GRUB2_VARIANT := legacy
 endif
 
 ifneq ($(CONFIG_GRUB_CONSOLE),)
@@ -63,15 +63,10 @@ ifneq ($(CONFIG_GRUB_IMAGES),)
 	# left here because the image builder doesnt need these
 	$(INSTALL_DIR) $(KDIR)/root.grub/boot/grub $(KDIR)/grub2
 	$(CP) $(KDIR)/bzImage $(KDIR)/root.grub/boot/vmlinuz
-	grub-mkimage \
-		-p /boot/grub \
-		-d $(STAGING_DIR_HOST)/lib/grub/i386-pc \
-		-o $(KDIR)/grub2/core.img \
-		-O i386-pc \
-		-c ./grub-early.cfg \
-		$(GRUB2_MODULES)
-	$(CP) $(STAGING_DIR_HOST)/lib/grub/i386-pc/*.img $(KDIR)/grub2/
-	echo '(hd0) $(BIN_DIR)/$(IMG_PREFIX)-combined-$(1).img' > $(KDIR)/grub2/device.map
+	$(CP) $(STAGING_DIR_HOST)/lib/grub/i386-pc/*.img \
+		$(STAGING_DIR_HOST)/lib/grub/grub2-$(strip $(GRUB2_VARIANT))/core.img \
+		$(KDIR)/grub2/
+	echo '(hd0) $(BIN_DIR)/$(IMG_COMBINED)-$(1).img' > $(KDIR)/grub2/device.map
 	sed \
 		-e 's#@SERIAL_CONFIG@#$(strip $(GRUB_SERIAL_CONFIG))#g' \
 		-e 's#@TERMINAL_CONFIG@#$(strip $(GRUB_TERMINAL_CONFIG))#g' \
@@ -100,16 +95,7 @@ endef
 define Image/Build/iso
 	$(INSTALL_DIR) $(KDIR)/root.grub/boot/grub $(KDIR)/grub2
 	$(CP) $(KDIR)/bzImage $(KDIR)/root.grub/boot/vmlinuz
-	grub-mkimage \
-		-p /boot/grub \
-		-d $(STAGING_DIR_HOST)/lib/grub/i386-pc \
-		-o $(KDIR)/grub2/eltorito.img \
-		-O i386-pc \
-		-c ./grub-early.cfg \
-		$(GRUB2_MODULES_ISO)
-	cat \
-		$(STAGING_DIR_HOST)/lib/grub/i386-pc/cdboot.img \
-		$(KDIR)/grub2/eltorito.img \
+		$(STAGING_DIR_HOST)/lib/grub/grub2-iso/eltorito.img \
 		> $(KDIR)/root.grub/boot/grub/eltorito.img
 	sed \
 		-e 's#@SERIAL_CONFIG@#$(strip $(GRUB_SERIAL_CONFIG))#g' \
