@@ -1,0 +1,25 @@
+diff --git a/src/maint/atmdump.c b/src/maint/atmdump.c
+index 8b178266bee6..d84d2f0b40b4 100644
+--- a/src/maint/atmdump.c
++++ b/src/maint/atmdump.c
+@@ -14,6 +14,7 @@
+ #include <sys/types.h>
+ #include <sys/time.h>
+ #include <sys/socket.h>
++#include <linux/sockios.h>
+ #include <netinet/in.h> /* for htonl and ntohl */
+ #include <atm.h>
+ 
+diff --git a/src/maint/saaldump.c b/src/maint/saaldump.c
+index 83bdde9fd468..bd113360971b 100644
+--- a/src/maint/saaldump.c
++++ b/src/maint/saaldump.c
+@@ -15,6 +15,7 @@
+ #include <sys/time.h>
+ #include <sys/types.h>
+ #include <sys/socket.h>
++#include <linux/sockios.h>
+ #include <atm.h>
+ 
+ #include "pdu.h"
+-- 
