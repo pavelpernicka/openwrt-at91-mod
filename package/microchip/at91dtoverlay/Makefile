@@ -28,25 +28,25 @@ endef
 
 define AT91DTOverlay/sama5d2_xplained
   TITLE:=AT91DTOverlay for SAMA5D2 Xplained board
-  BUILD_SUBTARGET:=sama5d2
+  BUILD_SUBTARGET:=sama5
   BUILD_DEVICES:=at91-sama5d2_xplained
 endef
 
 define AT91DTOverlay/sama5d3_xplained
   TITLE:=AT91DTOverlay for SAMA5D3 Xplained board
-  BUILD_SUBTARGET:=sama5d3
+  BUILD_SUBTARGET:=sama5
   BUILD_DEVICES:=at91-sama5d3_xplained
 endef
 
 define AT91DTOverlay/sama5d4_xplained
   TITLE:=AT91DTOverlay for SAMA5D4 Xplained board
-  BUILD_SUBTARGET:=sama5d4
+  BUILD_SUBTARGET:=sama5
   BUILD_DEVICES:=at91-sama5d4_xplained
 endef
 
 define AT91DTOverlay/sama5d27_som1_ek
   TITLE:=AT91DTOverlay for SAMA5D27 SOM1 Ek
-  BUILD_SUBTARGET:=sama5d2
+  BUILD_SUBTARGET:=sama5
   BUILD_DEVICES:=at91-sama5d27_som1_ek
 endef
 
