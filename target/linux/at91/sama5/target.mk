@@ -3,6 +3,7 @@ CPU_TYPE:=cortex-a5
 CPU_SUBTYPE:=vfpv4
 FEATURES+=fpu
 DEFAULT_PACKAGES += kmod-usb2
+SUBTARGET:=sama5
 
 define Target/Description
 	Build generic firmware for Microchip(Atmel AT91) SAMA5D2,

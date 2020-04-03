@@ -1,5 +1,6 @@
 BOARDNAME:= SAM9X Boards (ARMv5)
 CPU_TYPE:=arm926ej-s
+SUBTARGET:=sam9x
 
 define Target/Description
 	Build generic firmware for Microchip AT91 SAM9x platforms
