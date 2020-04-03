@@ -16,6 +16,7 @@ PKG_SOURCE_URL:=http://www.us.tcpdump.org/release/ \
 	http://www.tcpdump.org/release/
 PKG_HASH:=2cd47cb3d460b6ff75f4a9940f594317ad456cfbf2bd2c8e5151e16559db6410
 
+PKG_BUILD_DIR:=$(BUILD_DIR)/$(PKG_NAME)-$(BUILD_VARIANT)/$(PKG_NAME)-$(PKG_VERSION)
 PKG_BUILD_PARALLEL:=1
 
 PKG_MAINTAINER:=Felix Fietkau <nbd@nbd.name>
