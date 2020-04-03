@@ -12,12 +12,15 @@ Signed-off-by: Lorenzo Bianconi <lorenzo@kernel.org>
  drivers/net/wireless/ath/ath9k/dynack.c | 37 ++++++++++++++-----------
  1 file changed, 21 insertions(+), 16 deletions(-)
 
+diff --git a/drivers/net/wireless/ath/ath9k/dynack.c b/drivers/net/wireless/ath/ath9k/dynack.c
+index f112fa5b2eac..38dbe25919f7 100644
 --- a/drivers/net/wireless/ath/ath9k/dynack.c
 +++ b/drivers/net/wireless/ath/ath9k/dynack.c
-@@ -79,6 +79,24 @@ static inline bool ath_dynack_bssidmask(
+@@ -78,6 +78,24 @@ static inline bool ath_dynack_bssidmask(struct ath_hw *ah, const u8 *mac)
+ 	return true;
  }
  
- /**
++/**
 + * ath_dynack_set_timeout - configure timeouts/slottime registers
 + * @ah: ath hw
 + * @to: timeout value
@@ -35,11 +38,10 @@ Signed-off-by: Lorenzo Bianconi <lorenzo@kernel.org>
 +	ath9k_hw_set_cts_timeout(ah, to);
 +}
 +
-+/**
+ /**
   * ath_dynack_compute_ackto - compute ACK timeout as the maximum STA timeout
   * @ah: ath hw
-  *
-@@ -86,7 +104,6 @@ static inline bool ath_dynack_bssidmask(
+@@ -86,7 +104,6 @@ static inline bool ath_dynack_bssidmask(struct ath_hw *ah, const u8 *mac)
   */
  static void ath_dynack_compute_ackto(struct ath_hw *ah)
  {
@@ -47,7 +49,7 @@ Signed-off-by: Lorenzo Bianconi <lorenzo@kernel.org>
  	struct ath_dynack *da = &ah->dynack;
  	struct ath_node *an;
  	int to = 0;
-@@ -96,15 +113,8 @@ static void ath_dynack_compute_ackto(str
+@@ -96,15 +113,8 @@ static void ath_dynack_compute_ackto(struct ath_hw *ah)
  			to = an->ackto;
  
  	if (to && da->ackto != to) {
@@ -64,7 +66,7 @@ Signed-off-by: Lorenzo Bianconi <lorenzo@kernel.org>
  	}
  }
  
-@@ -198,10 +208,7 @@ void ath_dynack_sample_tx_ts(struct ath_
+@@ -198,10 +208,7 @@ void ath_dynack_sample_tx_ts(struct ath_hw *ah, struct sk_buff *skb,
  		    ieee80211_is_assoc_resp(hdr->frame_control) ||
  		    ieee80211_is_auth(hdr->frame_control)) {
  			ath_dbg(common, DYNACK, "late ack\n");
@@ -87,3 +89,6 @@ Signed-off-by: Lorenzo Bianconi <lorenzo@kernel.org>
  }
  EXPORT_SYMBOL(ath_dynack_reset);
  
+-- 
+2.17.1
+
