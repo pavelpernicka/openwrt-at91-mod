@@ -37,9 +37,11 @@ Signed-off-by: Petr Štetiar <ynezz@true.cz>
  drivers/net/wireless/marvell/mwl8k.c | 13 +++++++++----
  1 file changed, 9 insertions(+), 4 deletions(-)
 
+diff --git a/drivers/net/wireless/marvell/mwl8k.c b/drivers/net/wireless/marvell/mwl8k.c
+index 8e4e9b6..ffc565a 100644
 --- a/drivers/net/wireless/marvell/mwl8k.c
 +++ b/drivers/net/wireless/marvell/mwl8k.c
-@@ -441,6 +441,9 @@ static const struct ieee80211_rate mwl8k
+@@ -441,6 +441,9 @@ struct mwl8k_sta {
  #define MWL8K_CMD_UPDATE_STADB		0x1123
  #define MWL8K_CMD_BASTREAM		0x1125
  
@@ -49,7 +51,7 @@ Signed-off-by: Petr Štetiar <ynezz@true.cz>
  static const char *mwl8k_cmd_name(__le16 cmd, char *buf, int bufsize)
  {
  	u16 command = le16_to_cpu(cmd);
-@@ -1016,8 +1019,9 @@ mwl8k_rxd_ap_process(void *_rxd, struct
+@@ -1016,8 +1019,9 @@ static void mwl8k_rxd_ap_refill(void *_rxd, dma_addr_t addr, int len)
  
  	if (rxd->channel > 14) {
  		status->band = NL80211_BAND_5GHZ;
@@ -61,7 +63,7 @@ Signed-off-by: Petr Štetiar <ynezz@true.cz>
  	} else {
  		status->band = NL80211_BAND_2GHZ;
  	}
-@@ -1124,8 +1128,9 @@ mwl8k_rxd_sta_process(void *_rxd, struct
+@@ -1124,8 +1128,9 @@ static void mwl8k_rxd_sta_refill(void *_rxd, dma_addr_t addr, int len)
  
  	if (rxd->channel > 14) {
  		status->band = NL80211_BAND_5GHZ;
@@ -73,3 +75,6 @@ Signed-off-by: Petr Štetiar <ynezz@true.cz>
  	} else {
  		status->band = NL80211_BAND_2GHZ;
  	}
+-- 
+1.9.1
+
