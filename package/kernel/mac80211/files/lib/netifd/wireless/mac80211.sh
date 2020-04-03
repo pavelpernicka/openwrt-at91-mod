@@ -513,7 +513,7 @@ mac80211_prepare_vif() {
 
 	case "$mode" in
 		monitor|mesh)
-			[ "$auto_channel" -gt 0 ] || iw dev "$ifname" set channel "$channel" $iw_htmode
+			[ "$auto_channel" -gt 0 ] || iw dev "$ifname" set channel "$channel" $htmode
 		;;
 	esac
 
@@ -544,40 +544,40 @@ mac80211_setup_supplicant_noctl() {
 	wpa_supplicant_run "$ifname"
 }
 
-mac80211_prepare_iw_htmode() {
+mac80211_setup_adhoc_htmode() {
 	case "$htmode" in
-		VHT20|HT20) iw_htmode=HT20;;
+		VHT20|HT20) ibss_htmode=HT20;;
 		HT40*|VHT40|VHT160)
 			case "$hwmode" in
 				a)
 					case "$(( ($channel / 4) % 2 ))" in
-						1) iw_htmode="HT40+" ;;
-						0) iw_htmode="HT40-";;
+						1) ibss_htmode="HT40+" ;;
+						0) ibss_htmode="HT40-";;
 					esac
 				;;
 				*)
 					case "$htmode" in
-						HT40+) iw_htmode="HT40+";;
-						HT40-) iw_htmode="HT40-";;
+						HT40+) ibss_htmode="HT40+";;
+						HT40-) ibss_htmode="HT40-";;
 						*)
 							if [ "$channel" -lt 7 ]; then
-								iw_htmode="HT40+"
+								ibss_htmode="HT40+"
 							else
-								iw_htmode="HT40-"
+								ibss_htmode="HT40-"
 							fi
 						;;
 					esac
 				;;
 			esac
-			[ "$auto_channel" -gt 0 ] && iw_htmode="HT40+"
+			[ "$auto_channel" -gt 0 ] && ibss_htmode="HT40+"
 		;;
 		VHT80)
-			iw_htmode="80MHZ"
+			ibss_htmode="80MHZ"
 		;;
 		NONE|NOHT)
-			iw_htmode="NOHT"
+			ibss_htmode="NOHT"
 		;;
-		*) iw_htmode="" ;;
+		*) ibss_htmode="" ;;
 	esac
 
 }
@@ -615,7 +615,7 @@ mac80211_setup_adhoc() {
 	mcval=
 	[ -n "$mcast_rate" ] && wpa_supplicant_add_rate mcval "$mcast_rate"
 
-	iw dev "$ifname" ibss join "$ssid" $freq $iw_htmode fixed-freq $bssid \
+	iw dev "$ifname" ibss join "$ssid" $freq $ibss_htmode fixed-freq $bssid \
 		beacon-interval $beacon_int \
 		${brstr:+basic-rates $brstr} \
 		${mcval:+mcast-rate $mcval} \
@@ -629,7 +629,40 @@ mac80211_setup_mesh() {
 	[ -n "$mcast_rate" ] && wpa_supplicant_add_rate mcval "$mcast_rate"
 	[ -n "$mesh_id" ] && ssid="$mesh_id"
 
-	iw dev "$ifname" mesh join "$ssid" freq $freq $iw_htmode \
+	case "$htmode" in
+		VHT20|HT20) mesh_htmode=HT20;;
+		HT40*|VHT40)
+			case "$hwmode" in
+				a)
+					case "$(( ($channel / 4) % 2 ))" in
+						1) mesh_htmode="HT40+" ;;
+						0) mesh_htmode="HT40-";;
+					esac
+				;;
+				*)
+					case "$htmode" in
+						HT40+) mesh_htmode="HT40+";;
+						HT40-) mesh_htmode="HT40-";;
+						*)
+							if [ "$channel" -lt 7 ]; then
+								mesh_htmode="HT40+"
+							else
+								mesh_htmode="HT40-"
+							fi
+						;;
+					esac
+				;;
+			esac
+		;;
+		VHT80)
+			mesh_htmode="80Mhz"
+		;;
+		VHT160)
+			mesh_htmode="160Mhz"
+		;;
+		*) mesh_htmode="NOHT" ;;
+	esac
+	iw dev "$ifname" mesh join "$ssid" freq $freq $mesh_htmode \
 		${mcval:+mcast-rate $mcval} \
 		beacon-interval $beacon_int
 }
@@ -671,6 +704,7 @@ mac80211_setup_vif() {
 		;;
 		adhoc)
 			wireless_vif_parse_encryption
+			mac80211_setup_adhoc_htmode
 			if [ "$wpa" -gt 0 -o "$auto_channel" -gt 0 ]; then
 				freq="$(get_freq "$phy" "$channel")"
 				mac80211_setup_supplicant_noctl || failed=1
@@ -784,7 +818,6 @@ drv_mac80211_setup() {
 	for_each_interface "sta adhoc mesh" mac80211_set_noscan
 	[ -n "$has_ap" ] && mac80211_hostapd_setup_base "$phy"
 
-	mac80211_prepare_iw_htmode
 	for_each_interface "sta adhoc mesh monitor" mac80211_prepare_vif
 	for_each_interface "ap" mac80211_prepare_vif
 
