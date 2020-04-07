@@ -1,0 +1,26 @@
+From 4f4d421ac34696cd6565941c609a6163ff7d8abc Mon Sep 17 00:00:00 2001
+From: Claudiu Beznea <claudiu.beznea@microchip.com>
+Date: Tue, 7 Apr 2020 10:38:59 +0300
+Subject: [PATCH] efi: fix compile error
+
+Signed-off-by: Claudiu Beznea <claudiu.beznea@microchip.com>
+---
+ lib/efi_loader/efi_variable.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/lib/efi_loader/efi_variable.c b/lib/efi_loader/efi_variable.c
+index c316bdfec0e4..5fe8129c5e21 100644
+--- a/lib/efi_loader/efi_variable.c
++++ b/lib/efi_loader/efi_variable.c
+@@ -522,7 +522,7 @@ efi_status_t EFIAPI efi_set_variable(u16 *variable_name,
+ 
+ 	if (old_size)
+ 		/* APPEND_WRITE */
+-		s += sprintf(s, old_val);
++		s += sprintf(s, "%s", old_val);
+ 	else
+ 		s += sprintf(s, "(blob)");
+ 
+-- 
+2.23.0
+
