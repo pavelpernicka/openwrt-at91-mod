@@ -72,7 +72,7 @@ $(eval $(call KernelPackage,at91-udc))
 define KernelPackage/atmel-usba-udc
   SUBMENU:=$(USB_MENU)
   TITLE:=High-speed USB Device Controller on atmel SoC
-  DEPENDS:=@TARGET_at91 +kmod-usb-gadget
+  DEPENDS:=@TARGET_at91 +kmod-usb-gadget +kmod-usb-gadget-serial
   KCONFIG:=CONFIG_USB_ATMEL_USBA
 ifneq ($(wildcard $(LINUX_DIR)/drivers/usb/gadget/udc/atmel_usba_udc.ko),)
   FILES:=$(LINUX_DIR)/drivers/usb/gadget/udc/atmel_usba_udc.ko
