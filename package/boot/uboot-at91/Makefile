@@ -7,12 +7,12 @@
 
 include $(TOPDIR)/rules.mk
 
-PKG_VERSION:=linux4sam-2020.04-rc1
+PKG_VERSION:=linux4sam-2020.04-rc3
 PKG_RELEASE:=1
 
 PKG_SOURCE_PROTO:=git
 PKG_SOURCE_URL:=https://github.com/linux4sam/u-boot-at91.git
-PKG_SOURCE_VERSION:=8d350344d037acb996e5b0709590720f90a5f1fe
+PKG_SOURCE_VERSION:=279575a7846508c94e0be571ee0186d413439e22
 
 include $(INCLUDE_DIR)/u-boot.mk
 include $(INCLUDE_DIR)/package.mk
