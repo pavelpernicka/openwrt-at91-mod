@@ -9,7 +9,7 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=at91dtoverlay
-PKG_VERSION:=linux4sam-2020.04-rc4
+PKG_VERSION:=linux4sam-2020.04
 PKG_RELEASE:=
 
 PKG_SOURCE_PROTO:=git
