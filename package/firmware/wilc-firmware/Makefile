@@ -8,12 +8,12 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=wilc-firmware
-PKG_VERSION:=wilc_linux_15_4
+PKG_VERSION:=wilc_linux_15_4_1
 
 PKG_SOURCE_PROTO:=git
 PKG_SOURCE_URL:=http://github.com/linux4wilc/firmware.git
-PKG_SOURCE_VERSION:=90555cfffefb4bf57d1c8b69fd4f16961d8950ac
-PKG_HASH:=24007375fd788c0c20f8005a11018494ab8fa4eab4d67458ae0fc91ea660bd45
+PKG_SOURCE_VERSION:=6b3897f8a95497c568ab6aa64675137bdeac8fb9
+PKG_HASH:=6cf15ab21aa693a7c12f851dd4812cd900298297659b33ba478c176cbc7c0df3
 
 include $(INCLUDE_DIR)/package.mk
 
