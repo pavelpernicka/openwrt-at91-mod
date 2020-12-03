@@ -55,7 +55,7 @@ at91_board_detect() {
 	*"SAMA5D2 Xplained")
 		name="sama5d2_xplained"
 		;;
-	*"SAMA5D2 ICP")
+	*"Microchip SAMA5D2-ICP")
 		name="sama5d2_icp"
 		;;
 	*"SAMA5D4 Xplained")
