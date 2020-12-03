@@ -13,6 +13,10 @@ sama5d3_xplained)
 	ucidef_set_interfaces_lan_wan "eth0" "eth1"
 	;;
 
+sama5d2_icp)
+	ucidef_set_interface_lan "lan1"
+	;;
+
 *)
 	ucidef_set_interface_lan "eth0"
 	;;
