@@ -31,10 +31,17 @@ TARGET_DEVICES += at91sam9g20ek_2mmc
 
 define Device/at91sam9g25ek
   $(Device/evaluation)
-  $(Device/evaluation-spiflashimage)
   DEVICE_TITLE := Atmel AT91SAM9G25-EK
 endef
 TARGET_DEVICES += at91sam9g25ek
+
+define Device/at91-ariag25
+  $(Device/evaluation)
+  $(Device/production)
+  $(Device/evaluation-spiflashimage)
+  DEVICE_TITLE := Acme Systems Aria G25
+endef
+TARGET_DEVICES += at91-ariag25
 
 define Device/at91sam9g35ek
   $(Device/evaluation)
