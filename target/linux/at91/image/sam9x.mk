@@ -31,6 +31,7 @@ TARGET_DEVICES += at91sam9g20ek_2mmc
 
 define Device/at91sam9g25ek
   $(Device/evaluation)
+  $(Device/evaluation-spiflashimage)
   DEVICE_TITLE := Atmel AT91SAM9G25-EK
 endef
 TARGET_DEVICES += at91sam9g25ek
@@ -49,6 +50,7 @@ TARGET_DEVICES += at91sam9m10g45ek
 
 define Device/at91sam9x25ek
   $(Device/evaluation)
+  $(Device/evaluation-spiflashimage)
   DEVICE_TITLE := Atmel AT91SAM9X25-EK
 endef
 TARGET_DEVICES += at91sam9x25ek

@@ -82,9 +82,43 @@ define Build/at91-sdcard
 	 $(BIN_DIR)/at91dtoverlay-$(DEVICE_NAME:at91-%=%)/zImage )
 endef
 
+define Build/at91-spiflash
+  if [ "$(DEVICE_NAME)" = "at91sam9g15ek" ]; then \
+    export DEVICE_NAME_CORRECTED=at91sam9x5ek; \
+  elif [ "$(DEVICE_NAME)" = "at91sam9g25ek" ]; then \
+    export DEVICE_NAME_CORRECTED=at91sam9x5ek; \
+  elif [ "$(DEVICE_NAME)" = "at91sam9g35ek" ]; then \
+    export DEVICE_NAME_CORRECTED=at91sam9x5ek; \
+  elif [ "$(DEVICE_NAME)" = "at91sam9x25ek" ]; then \
+    export DEVICE_NAME_CORRECTED=at91sam9x5ek; \
+  elif [ "$(DEVICE_NAME)" = "at91sam9x35ek" ]; then \
+    export DEVICE_NAME_CORRECTED=at91sam9x5ek; \
+  else \
+    export DEVICE_NAME_CORRECTED=$(DEVICE_NAME); \
+  fi; \
+  echo ${DEVICE_NAME_CORRECTED};
+
+  mkenvimage -s 0x3000 -o $(BIN_DIR)/uboot.env \
+        ./boards/${DEVICE_NAME_CORRECTED}/uboot-env.txt
+
+  ./gen_at91_spiflash_img.sh \
+      $(BIN_DIR)/uboot.env \
+      $(BIN_DIR)/u-boot-${DEVICE_NAME_CORRECTED}_spiflash/u-boot.bin \
+      $(BIN_DIR)/at91bootstrap-${DEVICE_NAME_CORRECTED}df_uboot/at91bootstrap.bin \
+      $(KDIR)/root.squashfs \
+      $(KDIR)/$(DEVICE_NAME:at91-%=%)-uImage \
+      $(BIN_DIR)/flash.bin
+
+endef
+
 define Device/evaluation-sdimage
   IMAGES += sdcard.img.gz
   IMAGE/sdcard.img.gz := at91-sdcard
+endef
+
+define Device/evaluation-spiflashimage
+  IMAGES += flash.bin
+  IMAGE/flash.bin := at91-spiflash
 endef
 
 define Device/evaluation
