@@ -8,7 +8,7 @@ UBOOT="$2"
 UBOOT_ENV="$1"
 
 newsize=$((16777216)) #16 MB flash
-rm $COMBINEDFILE
+rm -f $COMBINEDFILE
 
 # offset musí začínat na začátku erase blocku
 dd conv=notrunc bs=1 if=$BOOTLOADER of=$COMBINEDFILE seek=0 

@@ -37,7 +37,6 @@ TARGET_DEVICES += at91sam9g25ek
 
 define Device/at91-ariag25
   $(Device/evaluation)
-  $(Device/production)
   $(Device/evaluation-spiflashimage)
   DEVICE_TITLE := Acme Systems Aria G25
 endef

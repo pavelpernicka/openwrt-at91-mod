@@ -92,7 +92,7 @@ define Build/at91-spiflash
       $(BIN_DIR)/at91bootstrap-$(DEVICE_NAME)df_uboot/at91bootstrap.bin \
       $(KDIR)/root.squashfs \
       $(KDIR)/$(DEVICE_NAME)-uImage \
-      $(BIN_DIR)/flash.bin
+      $@
 
 endef
 
