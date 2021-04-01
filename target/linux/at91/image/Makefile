@@ -88,10 +88,10 @@ define Build/at91-spiflash
 
   ./gen_at91_spiflash_img.sh \
       $(BIN_DIR)/uboot.env \
-      $(BIN_DIR)/u-boot-$(DEVICE_NAME:at91-%=%)_spiflash/u-boot.bin \
-      $(BIN_DIR)/at91bootstrap-$(DEVICE_NAME:at91-%=%)df_uboot/at91bootstrap.bin \
+      $(BIN_DIR)/u-boot-$(DEVICE_NAME)_spiflash/u-boot.bin \
+      $(BIN_DIR)/at91bootstrap-$(DEVICE_NAME)df_uboot/at91bootstrap.bin \
       $(KDIR)/root.squashfs \
-      $(KDIR)/$(DEVICE_NAME:at91-%=%)-uImage \
+      $(KDIR)/$(DEVICE_NAME)-uImage \
       $(BIN_DIR)/flash.bin
 
 endef
