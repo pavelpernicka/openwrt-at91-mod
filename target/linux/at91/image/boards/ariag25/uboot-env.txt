@@ -13,5 +13,5 @@ loadaddr=0x21000000
 stderr=serial
 stdin=serial
 stdout=serial
-ethaddr=01:02:03:04:05:06
+ethaddr=ba:d0:4a:9c:4e:ce
 

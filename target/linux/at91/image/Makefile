@@ -102,6 +102,7 @@ define Device/evaluation-sdimage
 endef
 
 define Device/evaluation-spiflashimage
+  KERNEL_SUFFIX := -uImage
   IMAGES += flash.bin
   IMAGE/flash.bin := at91-spiflash
 endef
@@ -145,4 +146,12 @@ define Device/production-dtb
 	  | append-kernel | pad-to $$$$(KERNEL_SIZE) | append-ubi
 endef
 
+define Device/production-dtb-bootloader
+  mkenvimage -s 0x3000 -o $(BIN_DIR)/uboot.env \
+        ./boards/$(DEVICE_NAME:at91-%=%)/uboot-env.txt
+  $(Device/production)
+  $(Device/dtb)
+  IMAGE/full_lash.bin := append-dtb | pad-to $$$$(DTB_SIZE) \
+	  | append-kernel | pad-to $$$$(KERNEL_SIZE) | append-ubi
+endef
 $(eval $(call BuildImage))

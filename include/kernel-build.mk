@@ -20,6 +20,7 @@ include $(INCLUDE_DIR)/kernel-defaults.mk
 
 define Kernel/Prepare
 	$(call Kernel/Prepare/Default)
+	$(call Kernel/Patch/Default)
 endef
 
 define Kernel/Configure

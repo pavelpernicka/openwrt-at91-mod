@@ -36,9 +36,8 @@ endef
 TARGET_DEVICES += at91sam9g25ek
 
 define Device/at91-ariag25
-  $(Device/evaluation)
   $(Device/evaluation-spiflashimage)
-  DEVICE_TITLE := Acme Systems Aria G25
+  DEVICE_TITLE := Acme Systems Aria G25 (spi flash)
 endef
 TARGET_DEVICES += at91-ariag25
 
@@ -56,7 +55,6 @@ TARGET_DEVICES += at91sam9m10g45ek
 
 define Device/at91sam9x25ek
   $(Device/evaluation)
-  $(Device/evaluation-spiflashimage)
   DEVICE_TITLE := Atmel AT91SAM9X25-EK
 endef
 TARGET_DEVICES += at91sam9x25ek
