@@ -1,7 +1,5 @@
-Index: linux-github_com_linux4sam_linux_at91_git-linux4sam_2020_10/arch/arm/boot/dts/at91-ariag25.dts
-===================================================================
---- linux-github_com_linux4sam_linux_at91_git-linux4sam_2020_10.orig/arch/arm/boot/dts/at91-ariag25.dts
-+++ linux-github_com_linux4sam_linux_at91_git-linux4sam_2020_10/arch/arm/boot/dts/at91-ariag25.dts
+--- a/arch/arm/boot/dts/at91-ariag25.dts
++++ b/arch/arm/boot/dts/at91-ariag25.dts
 @@ -1,9 +1,10 @@
 -// SPDX-License-Identifier: GPL-2.0-or-later
  /*
@@ -134,23 +132,23 @@ Index: linux-github_com_linux4sam_linux_at91_git-linux4sam_2020_10/arch/arm/boot
 +						reg = <0x00000000 0x00002000>;
 +					};
 +
-+					dtb@00002000 {
-+						label = "device tree";
-+						reg = <0x00002000 0x00005000>;
++					u-boot_env@00005000 {
++						label = "u-boot_env";
++						reg = <0x00005000 0x00003000>;
 +					};
 +
-+					kernel@00007000 {
++					u-boot@00008000 {
++						label = "u-boot";
++						reg = <0x00008000 0x000a0000>;
++					};
++
++					kernel@000a8000 {
 +						label = "kernel";
-+						reg = <0x00007000 0x00290000>;
++						reg = <0x000a8000 0x00370000>;
 +					};
-+
-+					rootfs@0037F000 {
-+						label = "rootfsr";
-+						reg = <0x00297000 0x00800000>;
-+					};
-+					rootfswritable@00A03000 {
-+						label = "rootfswritable";
-+						reg = <0x00A97000 0x00569000>;
++					rootfs@00418000 {
++						label = "rootfs";
++						reg = <0x00418000 0x00BE8000>;
 +					};
 +				};
 +
