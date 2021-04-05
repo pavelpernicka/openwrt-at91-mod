@@ -167,6 +167,7 @@ Signed-off-by: John Crispin <john@phrozen.org>
  config LIB80211_CRYPT_CCMP
 -	tristate
 +	tristate "LIB80211_CRYPT_CCMP"
+	select CRYPTO
  	select CRYPTO_AES
  	select CRYPTO_CCM
  

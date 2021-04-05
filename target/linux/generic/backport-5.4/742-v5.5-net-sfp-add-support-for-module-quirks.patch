@@ -26,14 +26,6 @@ Signed-off-by: Russell King <rmk+kernel@armlinux.org.uk>
  /**
   * struct sfp_bus - internal representation of a sfp bus
   */
-@@ -22,6 +28,7 @@ struct sfp_bus {
- 	const struct sfp_socket_ops *socket_ops;
- 	struct device *sfp_dev;
- 	struct sfp *sfp;
-+	const struct sfp_quirk *sfp_quirk;
- 
- 	const struct sfp_upstream_ops *upstream_ops;
- 	void *upstream;
 @@ -31,6 +38,46 @@ struct sfp_bus {
  	bool started;
  };
@@ -99,13 +91,3 @@ Signed-off-by: Russell King <rmk+kernel@armlinux.org.uk>
 +
  	if (ops && ops->module_insert)
  		ret = ops->module_insert(bus->upstream, id);
- 
-@@ -623,6 +675,8 @@ void sfp_module_remove(struct sfp_bus *b
- 
- 	if (ops && ops->module_remove)
- 		ops->module_remove(bus->upstream);
-+
-+	bus->sfp_quirk = NULL;
- }
- EXPORT_SYMBOL_GPL(sfp_module_remove);
- 
