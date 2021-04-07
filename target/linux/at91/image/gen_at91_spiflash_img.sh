@@ -15,7 +15,7 @@ dd conv=notrunc bs=1 if=$BOOTLOADER of=$COMBINEDFILE seek=0
 dd conv=notrunc bs=1 if=$UBOOT_ENV of=$COMBINEDFILE seek=$((0x00005000))
 dd conv=notrunc bs=1 if=$UBOOT of=$COMBINEDFILE seek=$((0x00008000))
 dd conv=notrunc bs=1 if=$KERNEL of=$COMBINEDFILE seek=$((0x000a8000))
-dd conv=notrunc bs=1 if=$ROOTFSR of=$COMBINEDFILE seek=$((0x00418000))
+dd conv=notrunc bs=1 if=$ROOTFSR of=$COMBINEDFILE seek=$((0x003B0000))
 
 filesize=$(stat -c "%s" $COMBINEDFILE)
 padcount=$((newsize - filesize))
